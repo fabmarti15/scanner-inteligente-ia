@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Scanner inteligente con IA · Corrige y clasifica cada pregunta</title>
+<title>Timy · Corrección con IA para colegios y universidades</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300..800&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -214,6 +214,23 @@ nav{position:sticky;top:0;z-index:200;background:rgba(4,20,47,.95);backdrop-filt
 .ministat .r{display:flex;justify-content:space-between;font-family:var(--mo);font-size:.6rem;padding:3px 0;color:var(--tx-60)}
 .ministat .r b{color:var(--tx);font-weight:500}
 
+
+/* hito 00 */
+.mi0{margin-top:2.6rem;border:1px solid var(--ice-3);border-radius:4px;background:#fff;padding:26px 28px;display:grid;grid-template-columns:88px 1fr 300px;gap:1.6rem;align-items:start}
+.ic0{width:88px;height:88px;border:2px dashed var(--ice-3);border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--ice)}
+.ic0 svg{width:42px;height:42px}
+.tx0 .st{font-family:var(--mo);font-size:.6rem;letter-spacing:.18em;color:var(--blue);display:block;margin-bottom:.5rem;text-transform:uppercase}
+.tx0 h3{margin-bottom:.5rem;font-size:1.05rem}
+.tx0 p{font-size:.93rem;color:var(--tx-60);line-height:1.45}
+.ex0{border:1px solid var(--ice-2);border-radius:3px;background:var(--ice);padding:13px 14px}
+.ex0h{display:flex;justify-content:space-between;align-items:baseline;gap:10px;padding-bottom:9px;margin-bottom:6px;border-bottom:1px solid var(--ice-3);font-family:var(--mo);font-size:.57rem;letter-spacing:.12em;text-transform:uppercase;color:var(--tx-40)}
+.ex0h b{color:var(--blue);letter-spacing:.04em}
+.ex0r{display:flex;justify-content:space-between;gap:10px;font-family:var(--mo);font-size:.62rem;padding:4px 0;color:var(--tx-60)}
+.ex0r b{color:var(--tx);font-weight:500}
+.ex0t{display:flex;justify-content:space-between;gap:10px;font-family:var(--mo);font-size:.62rem;padding-top:8px;margin-top:5px;border-top:1px solid var(--ice-3);color:var(--tx)}
+.ex0t b{color:var(--blue);font-weight:500}
+@media(max-width:900px){.mi0{grid-template-columns:1fr;gap:1.1rem}}
+
 /* PRICING */
 .price{background:var(--ice)}
 .pg{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:2.6rem}
@@ -293,19 +310,19 @@ footer{background:var(--navy);color:var(--lt-45);padding:44px 0 40px;font-family
 
 <nav>
   <div class="nv">
-    <a class="brand" href="#top">Scanner<span class="dot"></span></a>
+    <a class="brand" href="#top">Timy<span class="dot"></span></a>
     <div class="nl">
-      <a href="#corrige" data-es="Corrige" data-en="Grading">Corrige</a>
-      <a href="#clasifica" data-es="Clasifica" data-en="Classifies">Clasifica</a>
-      <a href="#dashboard" data-es="Dashboard" data-en="Dashboard">Dashboard</a>
       <a href="#como" data-es="Cómo funciona" data-en="How it works">Cómo funciona</a>
+      <a href="#corrige" data-es="Corrige" data-en="Grading">Corrige</a>
+      <a href="#clasifica" data-es="Desglose" data-en="Breakdown">Desglose</a>
+      <a href="#dashboard" data-es="Dashboard" data-en="Dashboard">Dashboard</a>
       <a href="#precio" data-es="Precio" data-en="Price">Precio</a>
     </div>
     <div class="lang">
       <button id="b-es" class="on" onclick="setLang('es')">ES</button>
       <button id="b-en" onclick="setLang('en')">EN</button>
     </div>
-    <a class="btn nvcta" href="#demo" data-es="Agendar demo" data-en="Book a demo">Agendar demo</a>
+    <a class="btn nvcta" href="#precio" data-es="Ver precio" data-en="See price">Ver precio</a>
   </div>
 </nav>
 
@@ -314,13 +331,10 @@ footer{background:var(--navy);color:var(--lt-45);padding:44px 0 40px;font-family
   <div class="wrap">
     <div class="hg">
       <div>
-        <div class="kicker on-dark" data-es="Scanner inteligente con IA · escáner, dispositivo y plataforma" data-en="Intelligent scanner with AI · scanner, device and platform">Scanner inteligente con IA · escáner, dispositivo y plataforma</div>
+        <div class="kicker on-dark" data-es="Timy · scanner inteligente con IA" data-en="Timy · intelligent scanner with AI">Timy · scanner inteligente con IA</div>
         <h1 data-es="Corrección con IA para colegios y universidades" data-en="AI grading for schools and universities">Corrección con IA para colegios y universidades</h1>
-        <p class="lede on-dark" data-es="El scanner inteligente lee la hoja y corrige, incluido el desarrollo manuscrito. Devuelve la nota con el desglose: qué objetivo falló, con qué habilidad y a qué nivel de dificultad. El mismo dato sube de curso a colegio, universidad o red." data-en="The intelligent scanner reads the sheet and grades it, handwritten work included. It returns the grade with the breakdown: which objective failed, with which skill, at what level of difficulty. The same data scales from class to school, university or network.">El scanner inteligente lee la hoja y corrige, incluido el desarrollo manuscrito. Devuelve la nota con el desglose: qué objetivo falló, con qué habilidad y a qué nivel de dificultad. El mismo dato sube de curso a colegio, universidad o red.</p>
-        <div class="hcta">
-          <a class="btn" href="#demo" data-es="Agendar una demo" data-en="Book a demo">Agendar una demo</a>
-          <a class="btn gd" href="#corrige" data-es="Ver una prueba corregida" data-en="See a graded test">Ver una prueba corregida</a>
-        </div>
+        <p class="lede on-dark" data-es="Timy lee la hoja y corrige, incluido el desarrollo manuscrito. Devuelve la nota con el desglose: qué objetivo falló, con qué habilidad y a qué nivel de dificultad. El mismo dato sube de curso a colegio, universidad o red." data-en="Timy reads the sheet and grades it, handwritten work included. It returns the grade with the breakdown: which objective failed, with which skill, at what level of difficulty. The same data scales from class to school, university or network.">Timy lee la hoja y corrige, incluido el desarrollo manuscrito. Devuelve la nota con el desglose: qué objetivo falló, con qué habilidad y a qué nivel de dificultad. El mismo dato sube de curso a colegio, universidad o red.</p>
+        
         <div class="hnum">
           <div><b data-es="Corrige todo automático" data-en="Grades it all automatically">Corrige todo automático</b><span data-es="alternativas y manuscrito con rúbrica" data-en="multiple choice and handwriting, with a rubric">alternativas y manuscrito con rúbrica</span></div>
           <div><b data-es="Clasifica cada pregunta" data-en="Classifies every question">Clasifica cada pregunta</b><span data-es="objetivo, eje, habilidad, dificultad" data-en="objective, strand, skill, difficulty">objetivo, eje, habilidad, dificultad</span></div>
@@ -339,33 +353,115 @@ footer{background:var(--navy);color:var(--lt-45);padding:44px 0 40px;font-family
   </div>
 </header>
 
-<!-- PAIN -->
-<section class="sec pain">
+<!-- COMO FUNCIONA -->
+<section class="sec price" id="como">
   <div class="wrap rv">
-    <div class="kicker" data-es="El domingo del profesor" data-en="The teacher's Sunday">El domingo del profesor</div>
-    <h2 style="margin-top:1.2rem;max-width:20ch" data-es="Un curso son 128 correcciones a mano." data-en="One class means 128 gradings by hand.">Un curso son 128 correcciones a mano.</h2>
-    <div class="math">
-      <span>32</span><i data-es="estudiantes" data-en="students">estudiantes</i>
-      <i>×</i>
-      <span>4</span><i data-es="preguntas de desarrollo" data-en="open questions">preguntas de desarrollo</i>
-      <i>=</i>
-      <span class="big">128</span>
+    <div class="kicker" data-es="Cómo funciona" data-en="How it works">Cómo funciona</div>
+    <h2 style="margin-top:1.2rem;max-width:22ch" data-es="Con la prueba que el profesor ya tiene." data-en="With the test the teacher already has.">Con la prueba que el profesor ya tiene.</h2>
+
+    <div class="tl">
+      <div class="tlg">
+
+        <div class="mi">
+          <div class="ic">
+            <svg viewBox="0 0 48 48" fill="none" stroke="#1A55DB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 40V12a2 2 0 0 1 2-2h13l9 9v21a2 2 0 0 1-2 2H14a2 2 0 0 1-2-2Z"/>
+              <path d="M27 10v9h9"/><path d="M24 34V23"/><path d="M20 27l4-4 4 4"/>
+            </svg>
+          </div>
+          <span class="st">01</span>
+          <h3 data-es="El profesor sube su prueba" data-en="The teacher uploads their test">El profesor sube su prueba</h3>
+          <p data-es="Sube el PDF de la prueba que ya usa. No hay que rehacer ni digitar nada." data-en="They upload the PDF of the test already in use. Nothing to rebuild, nothing to type.">Sube el PDF de la prueba que ya usa. No hay que rehacer ni digitar nada.</p>
+          <div class="ministat">
+            <div class="r"><span data-es="Preguntas del colegio" data-en="School questions">Preguntas del colegio</span><b>4.812</b></div>
+            <div class="r"><span data-es="Álgebra" data-en="Algebra">Álgebra</span><b>1.204</b></div>
+            <div class="r"><span data-es="Geometría" data-en="Geometry">Geometría</span><b>862</b></div>
+            <div class="r"><span data-es="Probabilidad" data-en="Probability">Probabilidad</span><b>531</b></div>
+          </div>
+        </div>
+
+        <div class="mi">
+          <div class="ic">
+            <svg viewBox="0 0 48 48" fill="none" stroke="#1A55DB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <ellipse cx="24" cy="13" rx="13" ry="5"/>
+              <path d="M11 13v10c0 2.8 5.8 5 13 5s13-2.2 13-5V13"/>
+              <path d="M11 23v10c0 2.8 5.8 5 13 5s13-2.2 13-5V23"/>
+              <path d="M18 33.5v3"/><path d="M30 33.5v3"/>
+            </svg>
+          </div>
+          <span class="st">02</span>
+          <h3 data-es="El modelo categoriza cada pregunta" data-en="The model categorizes every question">El modelo categoriza cada pregunta</h3>
+          <p data-es="Y la guarda en una base de datos inteligente hecha para evaluación, con psicometría." data-en="And stores it in an intelligent database built for assessment, with psychometrics.">Y la guarda en una base de datos inteligente hecha para evaluación, con psicometría.</p>
+          <ul>
+            <li data-es="Dificultad" data-en="Difficulty">Dificultad</li>
+            <li data-es="Eje temático" data-en="Content strand">Eje temático</li>
+            <li data-es="Habilidad cognitiva" data-en="Cognitive skill">Habilidad cognitiva</li>
+            <li data-es="Objetivo de aprendizaje" data-en="Learning objective">Objetivo de aprendizaje</li>
+            <li data-es="Rúbrica generada" data-en="Generated rubric">Rúbrica generada</li>
+          </ul>
+        </div>
+
+        <div class="mi">
+          <div class="ic">
+            <svg viewBox="0 0 48 48" fill="none" stroke="#1A55DB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="8" y="22" width="32" height="14" rx="2"/>
+              <path d="M15 22V9a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v13"/>
+              <path d="M19 13h10"/><path d="M19 17h7"/>
+              <path d="M13 29h22"/>
+            </svg>
+          </div>
+          <span class="st">03</span>
+          <h3 data-es="Timy corrige y compara" data-en="Timy grades and compares">Timy corrige y compara</h3>
+          <p data-es="Identifica al estudiante y su curso, evalúa, y marca fortalezas y debilidades." data-en="It identifies the student and their class, grades, and marks strengths and weaknesses.">Identifica al estudiante y su curso, evalúa, y marca fortalezas y debilidades.</p>
+          <ul>
+            <li data-es="Feedback específico por estudiante" data-en="Specific feedback per student">Feedback específico por estudiante</li>
+            <li data-es="Dashboard del curso" data-en="Class dashboard">Dashboard del curso</li>
+            <li data-es="Comparación con otros cursos" data-en="Comparison with other classes">Comparación con otros cursos</li>
+            <li data-es="Benchmark con otras instituciones" data-en="Benchmark with other institutions">Benchmark con otras instituciones</li>
+          </ul>
+        </div>
+
+        <div class="mi">
+          <div class="ic">
+            <svg viewBox="0 0 48 48" fill="none" stroke="#1A55DB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M11 37c0-6 5-8 10-8s9-2 9-7"/>
+              <circle cx="11" cy="37" r="4"/>
+              <circle cx="30" cy="19" r="4"/>
+              <path d="M34 12l4-4-4-4"/><path d="M38 8h-6"/>
+            </svg>
+          </div>
+          <span class="st">04</span>
+          <h3 data-es="Ruta de aprendizaje adaptativa" data-en="Adaptive learning path">Ruta de aprendizaje adaptativa</h3>
+          <p data-es="Con las fortalezas y debilidades ya identificadas, el sistema arma una ruta distinta para cada estudiante." data-en="With strengths and weaknesses already identified, the system builds a different path for each student.">Con las fortalezas y debilidades ya identificadas, el sistema arma una ruta distinta para cada estudiante.</p>
+        </div>
+
+      </div>
     </div>
-    <div class="pgrid">
-      <div>
-        <span class="pn">01</span>
-        <h3 data-es="El tiempo" data-en="Time">El tiempo</h3>
-        <p data-es="Cuatro a seis horas por curso. Y el profesor tiene cinco cursos. La retroalimentación llega dos semanas después." data-en="Four to six hours per class. And the teacher has five classes. Feedback arrives two weeks later.">Cuatro a seis horas por curso. Y el profesor tiene cinco cursos. La retroalimentación llega dos semanas después.</p>
+
+    <div class="mi0">
+      <div class="ic0">
+        <svg viewBox="0 0 48 48" fill="none" stroke="#1A55DB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M14 41V11a2 2 0 0 1 2-2h12l8 8v24a2 2 0 0 1-2 2H16a2 2 0 0 1-2-2Z"/>
+          <path d="M28 9v8h8"/>
+          <circle cx="24" cy="28" r="6"/>
+          <path d="M24 22v-2M24 36v-2M18 28h-2M32 28h-2M20 24l-1.5-1.5M28 32l1.5 1.5M28 24l1.5-1.5M20 32l-1.5 1.5"/>
+        </svg>
       </div>
-      <div>
-        <span class="pn">02</span>
-        <h3 data-es="La consistencia" data-en="Consistency">La consistencia</h3>
-        <p data-es="La prueba 3 y la 29 se corrigen distinto. Dos profesores del mismo departamento también." data-en="Test 3 and test 29 get graded differently. So do two teachers in the same department.">La prueba 3 y la 29 se corrigen distinto. Dos profesores del mismo departamento también.</p>
+      <div class="tx0">
+        <span class="st" data-es="00 · pasa solo" data-en="00 · happens on its own">00 · pasa solo</span>
+        <h3 data-es="Si el profesor no subió la prueba antes" data-en="If the teacher did not upload the test first">Si el profesor no subió la prueba antes</h3>
+        <p data-es="Escanea directo y el sistema detecta que son preguntas nuevas. Reconoce la asignatura, clasifica cada pregunta por su eje temático, la guarda en la base de la institución y recién después corrige." data-en="They scan straight away and the system detects the questions are new. It recognizes the subject, classifies each question by its content strand, stores it in the institution's database and only then grades.">Escanea directo y el sistema detecta que son preguntas nuevas. Reconoce la asignatura, clasifica cada pregunta por su eje temático, la guarda en la base de la institución y recién después corrige.</p>
       </div>
-      <div>
-        <span class="pn">03</span>
-        <h3 data-es="Lo que queda" data-en="What is left">Lo que queda</h3>
-        <p data-es="Después de todo ese trabajo queda un 5,6. Nada más." data-en="After all that work, what is left is a 5.6. Nothing else.">Después de todo ese trabajo queda un 5,6. Nada más.</p>
+      <div class="ex0">
+        <div class="ex0h">
+          <span data-es="PDF detectado" data-en="PDF detected">PDF detectado</span>
+          <b data-es="Biología · 4° Medio" data-en="Biology · Grade 12">Biología · 4° Medio</b>
+        </div>
+        <div class="ex0r"><span data-es="Célula y metabolismo" data-en="Cell and metabolism">Célula y metabolismo</span><b>6</b></div>
+        <div class="ex0r"><span data-es="Genética y herencia" data-en="Genetics and heredity">Genética y herencia</span><b>5</b></div>
+        <div class="ex0r"><span data-es="Sistema inmune y salud" data-en="Immune system and health">Sistema inmune y salud</span><b>5</b></div>
+        <div class="ex0r"><span data-es="Ecosistemas y sostenibilidad" data-en="Ecosystems and sustainability">Ecosistemas y sostenibilidad</span><b>4</b></div>
+        <div class="ex0t"><span data-es="Preguntas nuevas guardadas" data-en="New questions stored">Preguntas nuevas guardadas</span><b>20</b></div>
       </div>
     </div>
   </div>
@@ -378,7 +474,7 @@ footer{background:var(--navy);color:var(--lt-45);padding:44px 0 40px;font-family
       <span class="vnum">01</span>
       <div>
         <div class="kicker" data-es="Corrige" data-en="Grading">Corrige</div>
-        <h2 style="margin-top:.9rem;max-width:22ch" data-es="Alternativas y manuscrito, en la misma hoja." data-en="Multiple choice and handwriting, on the same sheet.">Alternativas y manuscrito, en la misma hoja.</h2>
+        <h2 style="margin-top:.9rem;max-width:22ch" data-es="El sistema corrige pruebas manuscritas y de alternativas." data-en="The system grades handwritten and multiple choice tests.">El sistema corrige pruebas manuscritas y de alternativas.</h2>
         <p class="lede" style="margin-top:1rem" data-es="La IA lee la letra del estudiante, aplica la rúbrica y explica el puntaje criterio por criterio." data-en="The AI reads the student's handwriting, applies the rubric and explains the score criterion by criterion.">La IA lee la letra del estudiante, aplica la rúbrica y explica el puntaje criterio por criterio.</p>
       </div>
     </div>
@@ -453,7 +549,7 @@ footer{background:var(--navy);color:var(--lt-45);padding:44px 0 40px;font-family
       <span class="vnum">02</span>
       <div>
         <div class="kicker" data-es="Clasifica" data-en="Classifies">Clasifica</div>
-        <h2 style="margin-top:.9rem;max-width:22ch" data-es="La nota viene con el desglose." data-en="The grade comes with the breakdown.">La nota viene con el desglose.</h2>
+        <h2 style="margin-top:.9rem;max-width:22ch" data-es="El sistema corrige cada prueba con un desglose." data-en="The system grades every test with a breakdown.">El sistema corrige cada prueba con un desglose.</h2>
         <p class="lede" style="margin-top:1rem" data-es="Cada pregunta queda etiquetada por objetivo, eje temático, habilidad cognitiva y dificultad." data-en="Every question is tagged by objective, content strand, cognitive skill and difficulty.">Cada pregunta queda etiquetada por objetivo, eje temático, habilidad cognitiva y dificultad.</p>
       </div>
     </div>
@@ -504,7 +600,7 @@ footer{background:var(--navy);color:var(--lt-45);padding:44px 0 40px;font-family
 <section class="sec" id="dashboard">
   <div class="wrap rv">
     <div class="kicker" data-es="Dashboard" data-en="Dashboard">Dashboard</div>
-    <h2 style="margin-top:1.2rem;max-width:22ch" data-es="Cuatro niveles, la misma evidencia." data-en="Four levels, the same evidence.">Cuatro niveles, la misma evidencia.</h2>
+    <h2 style="margin-top:1.2rem;max-width:22ch" data-es="Dashboard para cada nivel." data-en="A dashboard for every level.">Dashboard para cada nivel.</h2>
     <p class="lede" style="margin-top:1rem" data-es="Cada pregunta corregida alimenta el nivel de arriba. Nadie llena una planilla." data-en="Every graded question feeds the level above. Nobody fills in a spreadsheet.">Cada pregunta corregida alimenta el nivel de arriba. Nadie llena una planilla.</p>
 
     <div class="dash4">
@@ -569,98 +665,6 @@ footer{background:var(--navy);color:var(--lt-45);padding:44px 0 40px;font-family
   </div>
 </section>
 
-<!-- COMO FUNCIONA -->
-<section class="sec price" id="como">
-  <div class="wrap rv">
-    <div class="kicker" data-es="Cómo funciona" data-en="How it works">Cómo funciona</div>
-    <h2 style="margin-top:1.2rem;max-width:22ch" data-es="Con la prueba que el profesor ya tiene." data-en="With the test the teacher already has.">Con la prueba que el profesor ya tiene.</h2>
-
-    <div class="tl">
-      <div class="tlg">
-
-        <div class="mi">
-          <div class="ic">
-            <svg viewBox="0 0 48 48" fill="none" stroke="#1A55DB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M12 40V12a2 2 0 0 1 2-2h13l9 9v21a2 2 0 0 1-2 2H14a2 2 0 0 1-2-2Z"/>
-              <path d="M27 10v9h9"/><path d="M24 34V23"/><path d="M20 27l4-4 4 4"/>
-            </svg>
-          </div>
-          <span class="st">01</span>
-          <h3 data-es="El profesor sube su prueba" data-en="The teacher uploads their test">El profesor sube su prueba</h3>
-          <p data-es="Sube el PDF de la prueba que ya usa. No hay que rehacer ni digitar nada." data-en="They upload the PDF of the test already in use. Nothing to rebuild, nothing to type.">Sube el PDF de la prueba que ya usa. No hay que rehacer ni digitar nada.</p>
-          <div class="ministat">
-            <div class="r"><span data-es="Preguntas del colegio" data-en="School questions">Preguntas del colegio</span><b>4.812</b></div>
-            <div class="r"><span data-es="Álgebra" data-en="Algebra">Álgebra</span><b>1.204</b></div>
-            <div class="r"><span data-es="Geometría" data-en="Geometry">Geometría</span><b>862</b></div>
-            <div class="r"><span data-es="Probabilidad" data-en="Probability">Probabilidad</span><b>531</b></div>
-          </div>
-        </div>
-
-        <div class="mi">
-          <div class="ic">
-            <svg viewBox="0 0 48 48" fill="none" stroke="#1A55DB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <ellipse cx="24" cy="13" rx="13" ry="5"/>
-              <path d="M11 13v10c0 2.8 5.8 5 13 5s13-2.2 13-5V13"/>
-              <path d="M11 23v10c0 2.8 5.8 5 13 5s13-2.2 13-5V23"/>
-              <path d="M18 33.5v3"/><path d="M30 33.5v3"/>
-            </svg>
-          </div>
-          <span class="st">02</span>
-          <h3 data-es="El modelo categoriza cada pregunta" data-en="The model categorizes every question">El modelo categoriza cada pregunta</h3>
-          <p data-es="Y la guarda en una base de datos inteligente hecha para evaluación, con psicometría." data-en="And stores it in an intelligent database built for assessment, with psychometrics.">Y la guarda en una base de datos inteligente hecha para evaluación, con psicometría.</p>
-          <ul>
-            <li data-es="Dificultad" data-en="Difficulty">Dificultad</li>
-            <li data-es="Eje temático" data-en="Content strand">Eje temático</li>
-            <li data-es="Habilidad cognitiva" data-en="Cognitive skill">Habilidad cognitiva</li>
-            <li data-es="Objetivo de aprendizaje" data-en="Learning objective">Objetivo de aprendizaje</li>
-            <li data-es="Rúbrica generada" data-en="Generated rubric">Rúbrica generada</li>
-          </ul>
-        </div>
-
-        <div class="mi">
-          <div class="ic">
-            <svg viewBox="0 0 48 48" fill="none" stroke="#1A55DB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="8" y="22" width="32" height="14" rx="2"/>
-              <path d="M15 22V9a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v13"/>
-              <path d="M19 13h10"/><path d="M19 17h7"/>
-              <path d="M13 29h22"/>
-            </svg>
-          </div>
-          <span class="st">03</span>
-          <h3 data-es="El scanner corrige y compara" data-en="The scanner grades and compares">El scanner corrige y compara</h3>
-          <p data-es="Identifica al estudiante y su curso, evalúa, y marca fortalezas y debilidades." data-en="It identifies the student and their class, grades, and marks strengths and weaknesses.">Identifica al estudiante y su curso, evalúa, y marca fortalezas y debilidades.</p>
-          <ul>
-            <li data-es="Feedback específico por estudiante" data-en="Specific feedback per student">Feedback específico por estudiante</li>
-            <li data-es="Dashboard del curso" data-en="Class dashboard">Dashboard del curso</li>
-            <li data-es="Comparación con otros cursos" data-en="Comparison with other classes">Comparación con otros cursos</li>
-            <li data-es="Benchmark con otras instituciones" data-en="Benchmark with other institutions">Benchmark con otras instituciones</li>
-          </ul>
-        </div>
-
-        <div class="mi">
-          <div class="ic">
-            <svg viewBox="0 0 48 48" fill="none" stroke="#1A55DB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M11 37c0-6 5-8 10-8s9-2 9-7"/>
-              <circle cx="11" cy="37" r="4"/>
-              <circle cx="30" cy="19" r="4"/>
-              <path d="M34 12l4-4-4-4"/><path d="M38 8h-6"/>
-            </svg>
-          </div>
-          <span class="st">04</span>
-          <h3 data-es="Ruta de aprendizaje adaptativa" data-en="Adaptive learning path">Ruta de aprendizaje adaptativa</h3>
-          <p data-es="Con las fortalezas y debilidades ya identificadas, el sistema arma una ruta distinta para cada estudiante." data-en="With strengths and weaknesses already identified, the system builds a different path for each student.">Con las fortalezas y debilidades ya identificadas, el sistema arma una ruta distinta para cada estudiante.</p>
-        </div>
-
-      </div>
-    </div>
-
-    <div class="tlnote">
-      <span class="tag" data-es="Atajo" data-en="Shortcut">Atajo</span>
-      <p data-es="Si el profesor escanea sin haber subido la prueba antes, el sistema detecta que son preguntas nuevas, las clasifica, las guarda en la base de la institución y recién después corrige. El paso 01 se hace solo." data-en="If the teacher scans without having uploaded the test first, the system detects the questions are new, classifies them, stores them in the institution's database and only then grades. Step 01 happens on its own.">Si el profesor escanea sin haber subido la prueba antes, el sistema detecta que son preguntas nuevas, las clasifica, las guarda en la base de la institución y recién después corrige. El paso 01 se hace solo.</p>
-    </div>
-  </div>
-</section>
-
 <!-- PRECIO -->
 <section class="sec" id="precio">
   <div class="wrap rv">
@@ -678,7 +682,7 @@ footer{background:var(--navy);color:var(--lt-45);padding:44px 0 40px;font-family
           <li data-es="Corrección de respuestas escritas a mano y de alternativas" data-en="Grading of handwritten answers and multiple choice">Corrección de respuestas escritas a mano y de alternativas</li>
           <li data-es="Dashboard de estudiante y de curso" data-en="Student and class dashboard">Dashboard de estudiante y de curso</li>
           <li data-es="Banco de preguntas propio y exportable" data-en="Your own exportable question bank">Banco de preguntas propio y exportable</li>
-          <li class="hl" data-es="1 scanner inteligente" data-en="1 intelligent scanner">1 scanner inteligente</li>
+          <li class="hl" data-es="1 scanner Timy incluido" data-en="1 Timy scanner included">1 scanner Timy incluido</li>
         </ul>
       </div>
 
@@ -692,14 +696,14 @@ footer{background:var(--navy);color:var(--lt-45);padding:44px 0 40px;font-family
           <li data-es="Comparación entre sedes y entre departamentos" data-en="Comparison across sites and departments">Comparación entre sedes y entre departamentos</li>
           <li data-es="Reporte de consistencia entre profesores" data-en="Teacher consistency report">Reporte de consistencia entre profesores</li>
           <li data-es="Benchmark con instituciones similares" data-en="Benchmark with similar institutions">Benchmark con instituciones similares</li>
-          <li class="hl" data-es="2 scanners inteligentes" data-en="2 intelligent scanners">2 scanners inteligentes</li>
+          <li class="hl" data-es="2 scanners Timy incluidos" data-en="2 Timy scanners included">2 scanners Timy incluidos</li>
         </ul>
       </div>
     </div>
 
     <div class="addone">
       <div class="t">
-        <span style="font-family:var(--dp)" data-es="Scanner inteligente adicional" data-en="Additional intelligent scanner">Scanner inteligente adicional</span>
+        <span style="font-family:var(--dp)" data-es="Scanner Timy adicional" data-en="Additional Timy scanner">Scanner Timy adicional</span>
         <span data-es="Incluye equipo, mantención y respuesta ante fallas. La institución no compra hardware." data-en="Includes the device, maintenance and failure response. The institution buys no hardware.">Incluye equipo, mantención y respuesta ante fallas. La institución no compra hardware.</span>
       </div>
       <b data-es="2 UF / mes" data-en="2 UF / month">2 UF / mes</b>
@@ -709,77 +713,11 @@ footer{background:var(--navy);color:var(--lt-45);padding:44px 0 40px;font-family
   </div>
 </section>
 
-<!-- INVERSIONISTAS -->
-<section class="sec inv" id="inversion">
-  <div class="wrap rv">
-    <div class="kicker on-dark" data-es="Para inversionistas" data-en="For investors">Para inversionistas</div>
-    <div class="ig">
-      <div>
-        <h2 style="margin-top:1.1rem;max-width:20ch" data-es="Ingreso recurrente sobre un activo que se acumula." data-en="Recurring revenue on an asset that compounds.">Ingreso recurrente sobre un activo que se acumula.</h2>
-        <p class="lede on-dark" style="margin-top:1rem" data-es="El scanner abre la puerta. Adentro queda el registro longitudinal de evaluación de la institución: pregunta, respuesta manuscrita, objetivo, habilidad y brecha, por estudiante, cada semana." data-en="The scanner opens the door. What stays inside is the institution's longitudinal record of assessment: question, handwritten answer, objective, skill and gap, per student, every week.">El scanner abre la puerta. Adentro queda el registro longitudinal de evaluación de la institución: pregunta, respuesta manuscrita, objetivo, habilidad y brecha, por estudiante, cada semana.</p>
-        <table class="itab">
-          <tr><td data-es="ARR con 100 instituciones" data-en="ARR at 100 institutions">ARR con 100 instituciones</td><td>16.200 UF · ≈ USD 680K</td></tr>
-          <tr><td data-es="Tarifa base mensual por cada 100" data-en="Monthly base fee per 100">Tarifa base mensual por cada 100</td><td>1.000 – 1.500 UF</td></tr>
-          <tr><td data-es="Segunda línea" data-en="Second line">Segunda línea</td><td data-es="Dashboard institucional al rector o sostenedor. Otro comprador, otro presupuesto." data-en="Institutional dashboard sold to the rector or owner. Different buyer, different budget.">Dashboard institucional al rector o sostenedor. Otro comprador, otro presupuesto.</td></tr>
-          <tr><td data-es="Moat" data-en="Moat">Moat</td><td data-es="El banco de preguntas se acumula y no se puede comprar hecho." data-en="The question bank accumulates and cannot be bought ready-made.">El banco de preguntas se acumula y no se puede comprar hecho.</td></tr>
-        </table>
-      </div>
-      <div>
-        <div class="mlab" style="color:var(--lt-45);margin-bottom:.9rem" data-es="Riesgos abiertos" data-en="Open risks">Riesgos abiertos</div>
-        <ul class="rk">
-          <li><em>01</em><span data-es="Costo de IA por hoja sin cuantificar. Define el margen bruto." data-en="AI cost per sheet unquantified. It defines gross margin.">Costo de IA por hoja sin cuantificar. Define el margen bruto.</span></li>
-          <li><em>02</em><span data-es="100 instituciones son al menos 100 equipos que hay que mantener." data-en="100 institutions means at least 100 devices to maintain.">100 instituciones son al menos 100 equipos que hay que mantener.</span></li>
-          <li><em>03</em><span data-es="Ciclo de venta institucional anual. Si se pierde la ventana, se pierde el año." data-en="Annual institutional sales cycle. Miss the window and you miss the year.">Ciclo de venta institucional anual. Si se pierde la ventana, se pierde el año.</span></li>
-          <li><em>04</em><span data-es="Precisión de lectura de manuscrito por idioma y caligrafía. Hay que medirla y publicarla." data-en="Handwriting accuracy by language and penmanship. It has to be measured and published.">Precisión de lectura de manuscrito por idioma y caligrafía. Hay que medirla y publicarla.</span></li>
-        </ul>
-        <a class="btn gd" style="margin-top:1.6rem" href="#demo" data-es="Pedir el one pager" data-en="Request the one pager">Pedir el one pager</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CTA -->
-<section class="sec" id="demo">
-  <div class="wrap rv">
-    <div class="cg">
-      <div>
-        <div class="kicker" data-es="Agendar" data-en="Book">Agendar</div>
-        <h2 style="margin-top:1.2rem;max-width:18ch" data-es="Una demo con una prueba tuya." data-en="A demo on one of your tests.">Una demo con una prueba tuya.</h2>
-        <p class="lede" style="margin-top:1rem" data-es="Manda una prueba que ya aplicaste, con la letra de tus estudiantes. La procesamos en la reunión." data-en="Send a test you have already given, with your students' handwriting. We process it live in the meeting.">Manda una prueba que ya aplicaste, con la letra de tus estudiantes. La procesamos en la reunión.</p>
-        <div class="quote" data-es="“El scanner se entrega en consignación. Nosotros respondemos por su mantención, su continuidad y sus fallas.”" data-en="“The scanner is delivered on consignment. We answer for its maintenance, its uptime and its failures.”">“El scanner se entrega en consignación. Nosotros respondemos por su mantención, su continuidad y sus fallas.”</div>
-      </div>
-      <div>
-        <form onsubmit="event.preventDefault();this.querySelector('.fnote').textContent=OK[LANG];">
-          <div class="frow">
-            <div class="fd"><label data-es="Nombre" data-en="Name">Nombre</label><input required></div>
-            <div class="fd"><label data-es="Cargo" data-en="Role">Cargo</label><input data-es-ph="Rector, UTP, sostenedor…" data-en-ph="Principal, academic head, owner…"></div>
-          </div>
-          <div class="fd"><label data-es="Institución" data-en="Institution">Institución</label><input required></div>
-          <div class="frow">
-            <div class="fd"><label data-es="País" data-en="Country">País</label><input required></div>
-            <div class="fd"><label data-es="Estudiantes" data-en="Students">Estudiantes</label>
-              <select>
-                <option data-es="Hasta 720" data-en="Up to 720">Hasta 720</option>
-                <option data-es="720 a 2.000" data-en="720 to 2,000">720 a 2.000</option>
-                <option data-es="Más de 2.000" data-en="More than 2,000">Más de 2.000</option>
-                <option data-es="Red o universidad" data-en="Network or university">Red o universidad</option>
-              </select>
-            </div>
-          </div>
-          <div class="fd"><label data-es="Correo" data-en="Email">Correo</label><input type="email" required></div>
-          <button class="btn" style="width:100%;justify-content:center;margin-top:.3rem" type="submit" data-es="Agendar demo" data-en="Book a demo">Agendar demo</button>
-          <p class="fnote" data-es="Respondemos en menos de 24 horas hábiles. Sin compromiso de compra." data-en="We reply within one business day. No purchase commitment.">Respondemos en menos de 24 horas hábiles. Sin compromiso de compra.</p>
-        </form>
-      </div>
-    </div>
-  </div>
-</section>
-
 <footer>
   <div class="wrap ft">
-    <a class="brand" href="#top">Scanner<span class="dot"></span></a>
-    <span data-es="Scanner inteligente con IA para evaluación institucional." data-en="Intelligent scanner with AI for institutional assessment.">Scanner inteligente con IA para evaluación institucional.</span>
-    <span><a href="#demo" data-es="Agendar demo" data-en="Book a demo">Agendar demo</a> · <a href="#inversion" data-es="Inversionistas" data-en="Investors">Inversionistas</a></span>
+    <a class="brand" href="#top">Timy<span class="dot"></span></a>
+    <span data-es="Timy · scanner inteligente con IA para evaluación institucional." data-en="Timy · intelligent scanner with AI for institutional assessment.">Timy · scanner inteligente con IA para evaluación institucional.</span>
+    <span><a href="#como" data-es="Cómo funciona" data-en="How it works">Cómo funciona</a> · <a href="#precio" data-es="Precio" data-en="Price">Precio</a></span>
   </div>
 </footer>
 
@@ -797,7 +735,7 @@ function setLang(l){
   });
   document.getElementById('b-es').classList.toggle('on',l==='es');
   document.getElementById('b-en').classList.toggle('on',l==='en');
-  document.title = l==='es' ? 'Scanner inteligente con IA · Corrige y clasifica cada pregunta' : 'Intelligent scanner with AI · Grades and classifies every question';
+  document.title = l==='es' ? 'Timy · Corrección con IA para colegios y universidades' : 'Timy · AI grading for schools and universities';
 }
 document.querySelectorAll('[data-es-ph]').forEach(function(el){el.setAttribute('placeholder',el.getAttribute('data-es-ph'));});
 

@@ -6,7 +6,7 @@
 <title>Timy · Corrección con IA para colegios y universidades</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300..800&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
 <style>
 :root{
   --navy:#04142F; --navy-3:#0C2F66;
@@ -17,19 +17,19 @@
   --tx:#04142F; --tx-60:rgba(4,20,47,.60); --tx-40:rgba(4,20,47,.40);
   --tx-15:rgba(4,20,47,.13); --tx-08:rgba(4,20,47,.07);
   --lt:rgba(255,255,255,.72); --lt-45:rgba(255,255,255,.45); --lt-15:rgba(255,255,255,.15);
-  --dp:"Bricolage Grotesque",Helvetica,sans-serif;
-  --bd:"Instrument Sans",Helvetica,sans-serif;
-  --mo:"DM Mono",ui-monospace,monospace;
+  --dp:"IBM Plex Sans",Helvetica,Arial,sans-serif;
+  --bd:"IBM Plex Sans",Helvetica,Arial,sans-serif;
+  --mo:"IBM Plex Mono",ui-monospace,monospace;
   --maxw:1200px;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{margin:0;background:#fff;color:var(--tx);font-family:var(--bd);font-size:17.5px;line-height:1.5;-webkit-font-smoothing:antialiased}
 .wrap{max-width:var(--maxw);margin:0 auto;padding:0 34px}
-h1,h2,h3,h4{font-family:var(--dp);margin:0;letter-spacing:-.035em;font-weight:600;line-height:1}
-h1{font-size:clamp(2.3rem,5.1vw,4.2rem);max-width:19ch}
-h2{font-size:clamp(1.8rem,3.6vw,2.9rem)}
-h3{font-size:1.18rem;letter-spacing:-.02em;line-height:1.15}
+h1,h2,h3,h4{font-family:var(--dp);margin:0;letter-spacing:-.022em;font-weight:600;line-height:1.04}
+h1{font-size:clamp(2.05rem,4.5vw,3.7rem);max-width:19ch}
+h2{font-size:clamp(1.6rem,3.1vw,2.5rem)}
+h3{font-size:1.15rem;letter-spacing:-.015em;line-height:1.2}
 h4{font-size:.98rem;letter-spacing:-.01em}
 p{margin:0}
 a{color:inherit}
@@ -52,7 +52,7 @@ img{display:block;max-width:100%}
 
 nav{position:sticky;top:0;z-index:200;background:rgba(255,255,255,.90);backdrop-filter:blur(14px);border-bottom:1px solid var(--tx-08)}
 .nv{max-width:var(--maxw);margin:0 auto;padding:0 34px;height:64px;display:flex;align-items:center;gap:1.8rem;color:var(--tx)}
-.brand{font-family:var(--dp);font-size:1.42rem;font-weight:700;letter-spacing:-.05em;text-decoration:none;display:flex;align-items:center;gap:.4rem;color:var(--tx)}
+.brand{font-family:var(--dp);font-size:1.42rem;font-weight:700;letter-spacing:-.03em;text-decoration:none;display:flex;align-items:center;gap:.4rem;color:var(--tx)}
 .dot{width:8px;height:8px;background:var(--blue);border-radius:50%;animation:bp 2.4s ease-in-out infinite}
 @keyframes bp{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.3;transform:scale(.7)}}
 .nl{display:flex;gap:1.5rem;margin-left:auto;font-family:var(--mo);font-size:.66rem;text-transform:uppercase;letter-spacing:.12em}
@@ -76,7 +76,7 @@ nav{position:sticky;top:0;z-index:200;background:rgba(255,255,255,.90);backdrop-
 .hero::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.045;mix-blend-mode:multiply;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='150'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='150' height='150' filter='url(%23n)'/%3E%3C/svg%3E")}
 .hero .wrap{position:relative;z-index:2}
-.hero h1{color:var(--tx);margin:1.3rem 0 1.4rem;font-weight:600;letter-spacing:-.035em;line-height:1.02}
+.hero h1{color:var(--tx);margin:1.3rem 0 1.4rem;font-weight:600;letter-spacing:-.025em;line-height:1.06}
 .hero h1 .fx-mono{font-family:var(--mo);font-weight:500;font-size:.8em;letter-spacing:-.03em;color:var(--blue)}
 .hero .lede{color:var(--tx-60)}
 .hg{display:grid;grid-template-columns:1fr 1.02fr;gap:clamp(30px,4.5vw,60px);align-items:center}
@@ -96,7 +96,7 @@ nav{position:sticky;top:0;z-index:200;background:rgba(255,255,255,.90);backdrop-
   padding:24px 22px;display:flex;flex-direction:column}
 .fx-scan__head{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid var(--tx-15);padding-bottom:12px;margin-bottom:4px}
 .fx-scan__head .t{font-family:var(--mo);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--tx-60);line-height:1.55}
-.fx-scan__head .n{font-family:var(--dp);font-weight:600;font-size:40px;letter-spacing:-.04em;line-height:1;color:var(--blue)}
+.fx-scan__head .n{font-family:var(--dp);font-weight:600;font-size:40px;letter-spacing:-.025em;line-height:1;color:var(--blue)}
 .fx-row{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;padding:12px 0;border-bottom:1px solid var(--tx-08)}
 .fx-row .q{font-family:var(--bd);font-size:13.5px;font-weight:500;line-height:1.3}
 .fx-row .q span{display:block;font-family:var(--mo);font-size:10px;letter-spacing:.06em;color:var(--tx-40);margin-top:4px}
@@ -124,18 +124,18 @@ nav{position:sticky;top:0;z-index:200;background:rgba(255,255,255,.90);backdrop-
 .fx-demo__bar{display:flex;align-items:center;gap:8px;padding:11px 15px;border-bottom:1px solid var(--tx-08);background:var(--ice)}
 .fx-demo__bar i{width:9px;height:9px;border-radius:50%;background:var(--tx-15);display:block}
 .fx-demo__bar .path{font-family:var(--mo);font-size:11px;color:var(--tx-40);margin-left:10px}
-.fx-demo__body{display:grid;grid-template-columns:300px 1fr;min-height:470px}
+.fx-demo__body{display:grid;grid-template-columns:330px 1fr;min-height:500px}
 .fx-demo__left{border-right:1px solid var(--tx-08);padding:18px;display:flex;flex-direction:column;gap:13px}
 .fx-lbl{font-family:var(--mo);font-size:10px;letter-spacing:.11em;text-transform:uppercase;color:var(--tx-40)}
 .fx-drop{border:1px dashed var(--tx-15);border-radius:9px;padding:17px 13px;text-align:center;font-family:var(--bd);font-size:12.5px;line-height:1.5;color:var(--tx-60)}
 .fx-drop b{display:block;color:var(--tx);font-weight:500;font-size:13px;margin-bottom:4px}
 .fx-samples{display:flex;flex-direction:column;gap:8px}
-.fx-samp{display:flex;gap:11px;align-items:center;text-align:left;cursor:pointer;background:#fff;border:1px solid var(--tx-08);border-radius:9px;padding:8px;font-family:var(--bd);color:var(--tx);transition:border-color .18s,background .18s}
+.fx-samp{display:flex;gap:13px;align-items:center;text-align:left;cursor:pointer;background:#fff;border:1px solid var(--tx-08);border-radius:9px;padding:10px;font-family:var(--bd);color:var(--tx);transition:border-color .18s,background .18s}
 .fx-samp:hover{border-color:var(--blue-3)}
 .fx-samp[aria-pressed="true"]{border-color:var(--blue);background:rgba(26,85,219,.05)}
-.fx-samp img{width:38px;height:48px;object-fit:cover;object-position:top;border-radius:3px;flex:none}
-.fx-samp .n{font-size:12.5px;font-weight:500;line-height:1.25}
-.fx-samp .s{display:block;font-family:var(--mo);font-size:9.5px;letter-spacing:.05em;color:var(--tx-40);margin-top:4px}
+.fx-samp img{width:66px;height:86px;object-fit:cover;object-position:top center;border-radius:3px;flex:none;box-shadow:0 1px 3px rgba(4,20,47,.10)}
+.fx-samp .n{font-size:13px;font-weight:500;line-height:1.3}
+.fx-samp .s{display:block;font-family:var(--mo);font-size:10px;letter-spacing:.03em;color:var(--tx-40);margin-top:5px;line-height:1.35}
 .fx-demo__right{padding:20px 22px;display:flex;flex-direction:column}
 .fx-idle{margin:auto;text-align:center;font-family:var(--bd);font-size:13.5px;line-height:1.6;color:var(--tx-40);max-width:32ch}
 .fx-proc{margin:auto;width:100%;max-width:330px;text-align:center}
@@ -147,7 +147,7 @@ nav{position:sticky;top:0;z-index:200;background:rgba(255,255,255,.90);backdrop-
 .fx-res__head{display:flex;justify-content:space-between;align-items:flex-end;border-bottom:1px solid var(--tx-08);padding-bottom:13px}
 .fx-res__head .who{font-family:var(--bd);font-size:13.5px;font-weight:500}
 .fx-res__head .who span{display:block;font-family:var(--mo);font-size:10px;letter-spacing:.06em;color:var(--tx-40);margin-top:5px}
-.fx-res__head .grade{font-family:var(--dp);font-weight:600;font-size:46px;letter-spacing:-.045em;line-height:.9;text-align:right;color:var(--blue)}
+.fx-res__head .grade{font-family:var(--dp);font-weight:600;font-size:46px;letter-spacing:-.028em;line-height:.9;text-align:right;color:var(--blue)}
 .fx-res__head .grade span{display:block;font-family:var(--mo);font-size:9.5px;font-weight:400;letter-spacing:.1em;color:var(--tx-40);margin-top:6px}
 .fx-res .fx-row{opacity:0;transform:translateY(6px);transition:opacity .45s cubic-bezier(.22,1,.36,1),transform .45s cubic-bezier(.22,1,.36,1)}
 .fx-res .fx-row.is-in{opacity:1;transform:none}
@@ -191,7 +191,7 @@ nav{position:sticky;top:0;z-index:200;background:rgba(255,255,255,.90);backdrop-
 .fx-final{position:absolute;right:0;top:50%;transform:translateY(-50%);width:min(420px,64%);display:grid;gap:1px;background:var(--tx-08);border-radius:6px;overflow:hidden;opacity:0;pointer-events:none;transition:opacity .7s}
 .fx-final.is-in{opacity:1}
 .fx-final .k{background:#fff;padding:20px 22px}
-.fx-final .k .v{font-family:var(--dp);font-weight:600;font-size:clamp(26px,3vw,40px);letter-spacing:-.045em;line-height:1}
+.fx-final .k .v{font-family:var(--dp);font-weight:600;font-size:clamp(26px,3vw,40px);letter-spacing:-.028em;line-height:1}
 .fx-final .k .v em{font-style:normal;font-family:var(--mo);font-size:.42em;letter-spacing:.02em;color:var(--tx-40);margin-left:8px}
 .fx-final .k .l{font-family:var(--mo);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--tx-40);margin-top:9px}
 .fx-pile-replay{position:absolute;right:0;bottom:0}
@@ -215,7 +215,7 @@ nav{position:sticky;top:0;z-index:200;background:rgba(255,255,255,.90);backdrop-
 
 /* value heads */
 .vhead{display:flex;align-items:flex-start;gap:1.3rem}
-.vnum{font-family:var(--dp);font-size:clamp(2.7rem,6vw,4.8rem);line-height:.8;font-weight:700;letter-spacing:-.06em;color:var(--ice-2);flex:0 0 auto}
+.vnum{font-family:var(--dp);font-size:clamp(2.7rem,6vw,4.8rem);line-height:.8;font-weight:700;letter-spacing:-.035em;color:var(--ice-2);flex:0 0 auto}
 .vg{display:grid;grid-template-columns:.92fr 1.08fr;gap:clamp(26px,4vw,54px);margin-top:2.6rem;align-items:start}
 
 .frame{position:relative;border:1px solid var(--tx-15);border-radius:3px;overflow:hidden;background:#fff;box-shadow:0 16px 38px rgba(4,20,47,.12)}
@@ -232,7 +232,7 @@ nav{position:sticky;top:0;z-index:200;background:rgba(255,255,255,.90);backdrop-
 .dhead .tg{font-family:var(--mo);font-size:.57rem;letter-spacing:.12em;text-transform:uppercase;color:var(--tx-40)}
 .dhead .tg.ok{color:var(--green)}
 .bigrow{display:flex;align-items:center;gap:1.2rem;margin-bottom:1.1rem}
-.bigrow .n{font-family:var(--dp);font-size:3rem;font-weight:700;letter-spacing:-.05em;line-height:.85;color:var(--blue)}
+.bigrow .n{font-family:var(--dp);font-size:3rem;font-weight:700;letter-spacing:-.03em;line-height:.85;color:var(--blue)}
 .bigrow .nl2{font-family:var(--mo);font-size:.56rem;text-transform:uppercase;letter-spacing:.14em;color:var(--tx-40);line-height:1.7}
 .rrow{display:grid;grid-template-columns:1fr auto;gap:12px;padding:9px 0;border-bottom:1px solid var(--tx-08);align-items:center}
 .rrow:last-child{border-bottom:0}
@@ -284,7 +284,7 @@ nav{position:sticky;top:0;z-index:200;background:rgba(255,255,255,.90);backdrop-
 .v2{background:var(--ice)}
 .tf{display:grid;grid-template-columns:auto 40px 1fr;gap:1.2rem;align-items:center;background:#fff;border:1px solid var(--tx-15);border-radius:4px;padding:22px}
 .tf .old{text-align:center;padding-right:.4rem}
-.tf .old b{font-family:var(--dp);font-size:3.2rem;font-weight:700;letter-spacing:-.05em;display:block;line-height:.85;color:var(--ice-3)}
+.tf .old b{font-family:var(--dp);font-size:3.2rem;font-weight:700;letter-spacing:-.03em;display:block;line-height:.85;color:var(--ice-3)}
 .tf .old span{font-family:var(--mo);font-size:.53rem;text-transform:uppercase;letter-spacing:.14em;color:var(--tx-40)}
 .tf .ar{font-family:var(--mo);color:var(--ice-3);font-size:1.5rem;text-align:center}
 
@@ -295,7 +295,7 @@ nav{position:sticky;top:0;z-index:200;background:rgba(255,255,255,.90);backdrop-
 .dp h3{margin-bottom:1.2rem;font-size:1.05rem}
 .kpi2{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--tx-08);border:1px solid var(--tx-08);border-radius:3px;overflow:hidden;margin-top:1.1rem}
 .kpi2 > div{background:#fff;padding:.85rem .9rem}
-.kpi2 b{font-family:var(--dp);font-size:1.4rem;font-weight:700;letter-spacing:-.04em;display:block;line-height:1;color:var(--blue)}
+.kpi2 b{font-family:var(--dp);font-size:1.4rem;font-weight:700;letter-spacing:-.025em;display:block;line-height:1;color:var(--blue)}
 .kpi2 span{font-family:var(--mo);font-size:.53rem;text-transform:uppercase;letter-spacing:.13em;color:var(--tx-40);display:block;margin-top:.32rem;line-height:1.5}
 
 /* TIMELINE */
@@ -345,7 +345,7 @@ nav{position:sticky;top:0;z-index:200;background:rgba(255,255,255,.90);backdrop-
 .pc.f{background:var(--navy);color:#fff;border-color:var(--navy)}
 .pc .tr{font-family:var(--mo);font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--tx-40)}
 .pc.f .tr{color:var(--lt-45)}
-.amt{font-family:var(--dp);font-size:3rem;font-weight:700;letter-spacing:-.05em;line-height:1;margin:.8rem 0 .2rem;display:flex;align-items:baseline;gap:.35rem}
+.amt{font-family:var(--dp);font-size:3rem;font-weight:700;letter-spacing:-.03em;line-height:1;margin:.8rem 0 .2rem;display:flex;align-items:baseline;gap:.35rem}
 .amt small{font-family:var(--mo);font-size:.64rem;letter-spacing:.1em;font-weight:400;color:var(--tx-40)}
 .pc.f .amt{color:var(--blue-3)}.pc.f .amt small{color:var(--lt-45)}
 .usd{font-family:var(--mo);font-size:.64rem;color:var(--tx-40)}
@@ -361,7 +361,7 @@ nav{position:sticky;top:0;z-index:200;background:rgba(255,255,255,.90);backdrop-
 .addone{margin-top:18px;background:#fff;border:1px solid var(--ice-3);border-radius:4px;padding:18px 22px;display:flex;flex-wrap:wrap;gap:1rem;align-items:center;justify-content:space-between}
 .addone .t{font-family:var(--dp);font-weight:700;font-size:1.02rem}
 .addone .t span{display:block;font-family:var(--bd);font-weight:400;font-size:.9rem;color:var(--tx-60);margin-top:.2rem;letter-spacing:0}
-.addone b{font-family:var(--dp);font-size:1.7rem;font-weight:700;letter-spacing:-.04em}
+.addone b{font-family:var(--dp);font-size:1.7rem;font-weight:700;letter-spacing:-.025em}
 .fine{font-family:var(--mo);font-size:.62rem;color:var(--tx-40);line-height:1.7;margin-top:1.2rem}
 
 /* investors */
@@ -411,6 +411,112 @@ footer{background:var(--navy);color:var(--lt-45);padding:44px 0 40px;font-family
   .frow{grid-template-columns:1fr}
   .cmp{grid-template-columns:96px 1fr}
 }
+
+/* ============ MOVIL ============ */
+@media(max-width:760px){
+  html,body{overflow-x:hidden}
+  body{font-size:16px}
+  .wrap,.nv{padding:0 16px}
+  .sec{padding:52px 0}
+  h1{font-size:2rem;line-height:1.1;max-width:none}
+  h2{font-size:1.45rem}
+  h3{font-size:1.05rem}
+  .lede{font-size:1rem}
+  .nv{height:56px;gap:.7rem}
+  .brand{font-size:1.2rem}
+  .nvcta{padding:.5rem .7rem;font-size:.58rem;letter-spacing:.1em}
+  .lang button{padding:.34rem .48rem;font-size:.6rem}
+
+  /* hero */
+  .hero{padding:34px 0 46px}
+  .hg{gap:26px}
+  .hnum{flex-direction:column;gap:0}
+  .hnum div{border-right:0;border-bottom:1px solid var(--tx-15);margin-right:0;padding:.85rem 0}
+  .hnum div:last-child{border-bottom:0}
+  .fx-scan__sheet{aspect-ratio:1200/1560}
+  .fx-scan__data{padding:14px 13px}
+  .fx-scan__head .n{font-size:26px}
+  .fx-scan__head .t{font-size:9px}
+  .fx-row{padding:9px 0}
+  .fx-row .q{font-size:12px}
+  .fx-row .q span{font-size:9px}
+  .fx-chip{font-size:9px;padding:3px 6px}
+  .fx-evid{font-size:11px;padding:8px 0 8px 10px}
+  .fx-scan__badge{left:0;bottom:10px;padding:8px 11px;gap:8px}
+  .fx-scan__badge .lbl{font-size:9px}
+  .fx-scan__badge .val{font-size:10px}
+
+  /* demo */
+  .fx-demo{border-radius:9px}
+  .fx-demo__bar .path{font-size:9.5px}
+  .fx-demo__body{min-height:0}
+  .fx-demo__left{padding:14px}
+  .fx-demo__right{padding:16px 14px}
+  .fx-samp{min-width:0;width:100%}
+  .fx-samples{flex-direction:column;overflow:visible}
+  .fx-samp img{width:58px;height:76px}
+  .fx-res__head .grade{font-size:32px}
+  .fx-kpis{gap:16px}
+  .fx-kpi .v{font-size:17px}
+  .fx-kpi .k{font-size:8.5px}
+
+  /* pila */
+  .fx-pile-wrap{padding:24px 16px 34px;border-radius:10px}
+  .fx-pile-grid{gap:20px}
+  .fx-stage{height:300px}
+  .fx-pile{width:112px;height:150px;left:0;top:auto;bottom:38px;transform:none}
+  .fx-feed{width:60%;top:0}
+  .fx-fr{grid-template-columns:18px 1fr auto;gap:7px;padding:5px 0}
+  .fx-fr .nm{font-size:10px}
+  .fx-fr .nm span{font-size:8px}
+  .fx-fr .g{font-size:10px}
+  .fx-final{width:100%;right:0;top:44%}
+  .fx-final .k{padding:13px 14px}
+  .fx-final .k .l{font-size:8.5px}
+  .fx-counter{font-size:9.5px}
+
+  /* timeline */
+  .tlg{grid-template-columns:1fr;gap:22px}
+  .mi .ic{width:64px;height:64px}
+  .mi .ic svg{width:31px;height:31px}
+  .mi .st{margin:.85rem 0 .4rem}
+  .mi0{padding:20px 16px;gap:.9rem}
+  .ic0{width:64px;height:64px}
+  .ic0 svg{width:31px;height:31px}
+
+  /* dashboard */
+  .dash4{grid-template-columns:1fr;gap:14px}
+  .dp{padding:17px 15px}
+  .hm{gap:3px;font-size:.5rem}
+  .dp .hm{grid-template-columns:74px repeat(6,1fr)!important}
+  .hm .rl{font-size:.5rem;letter-spacing:0;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+  .cell{font-size:.5rem}
+  .kpi2 b{font-size:1.15rem}
+  .kpi2 span{font-size:.48rem}
+
+  /* comparaciones y tarjetas */
+  .cmp{grid-template-columns:82px 1fr;gap:8px 10px;font-size:.56rem}
+  .cmp .tk{height:17px}
+  .cmp .fl{font-size:.53rem;padding-right:5px}
+  .dcard{padding:16px 15px}
+  .dhead .tt{font-size:.86rem}
+  .dhead{flex-direction:column;gap:5px;align-items:flex-start}
+  .tf{padding:16px}
+  .tf .old b{font-size:2.5rem}
+  .bt{font-size:.56rem}
+  .vhead{gap:.8rem}
+  .vnum{font-size:2.2rem}
+
+  /* precio */
+  .pc{padding:22px 18px}
+  .amt{font-size:2.4rem}
+  .addone{flex-direction:column;align-items:flex-start;gap:.6rem;padding:16px 18px}
+  .ministat .r{font-size:.55rem}
+  .ex0r,.ex0t{font-size:.56rem}
+
+  footer{padding:34px 0 32px}
+  .ft{flex-direction:column;align-items:flex-start;gap:.8rem;font-size:.62rem}
+}
 </style>
 </head>
 <body>
@@ -419,8 +525,8 @@ footer{background:var(--navy);color:var(--lt-45);padding:44px 0 40px;font-family
   <div class="nv">
     <a class="brand" href="#top">Timy<span class="dot"></span></a>
     <div class="nl">
-      <a href="#como" data-es="Cómo funciona" data-en="How it works">Cómo funciona</a>
       <a href="#corrige" data-es="Corrige" data-en="Grading">Corrige</a>
+      <a href="#como" data-es="Cómo funciona" data-en="How it works">Cómo funciona</a>
       <a href="#clasifica" data-es="Desglose" data-en="Breakdown">Desglose</a>
       <a href="#dashboard" data-es="Dashboard" data-en="Dashboard">Dashboard</a>
       <a href="#precio" data-es="Precio" data-en="Price">Precio</a>
@@ -477,6 +583,113 @@ footer{background:var(--navy);color:var(--lt-45);padding:44px 0 40px;font-family
     </div>
   </div>
 </header>
+
+<!-- 01 CORRIGE -->
+<section class="sec" id="corrige">
+  <div class="wrap rv">
+    <div class="vhead">
+      <span class="vnum">01</span>
+      <div>
+        <div class="kicker" data-es="Corrige" data-en="Grading">Corrige</div>
+        <h2 style="margin-top:.9rem;max-width:22ch" data-es="El sistema corrige pruebas manuscritas y de alternativas." data-en="The system grades handwritten and multiple choice tests.">El sistema corrige pruebas manuscritas y de alternativas.</h2>
+        <p class="lede" style="margin-top:1rem" data-es="La IA lee la letra del estudiante, aplica la rúbrica y explica el puntaje criterio por criterio." data-en="The AI reads the student's handwriting, applies the rubric and explains the score criterion by criterion.">La IA lee la letra del estudiante, aplica la rúbrica y explica el puntaje criterio por criterio.</p>
+      </div>
+    </div>
+
+    <div class="fx-demo">
+      <div class="fx-demo__bar">
+        <i></i><i></i><i></i><span class="path">timy.app / corrección / 4° Medio A</span>
+      </div>
+      <div class="fx-demo__body">
+        <div class="fx-demo__left">
+          <div class="fx-lbl" data-es="Entrada" data-en="Input">Entrada</div>
+          <div class="fx-drop">
+            <b data-es="Arrastra una prueba aplicada" data-en="Drag in a test you have given">Arrastra una prueba aplicada</b>
+            <span data-es="El PDF de la prueba que ya usa, o la hoja directo al escáner. No hay que rehacer ni digitar nada." data-en="The PDF of the test already in use, or the sheet straight into the scanner. Nothing to rebuild, nothing to type.">El PDF de la prueba que ya usa, o la hoja directo al escáner. No hay que rehacer ni digitar nada.</span>
+          </div>
+          <div class="fx-lbl" data-es="O prueba con una de estas" data-en="Or try one of these">O prueba con una de estas</div>
+          <div class="fx-samples" id="fxSamples"></div>
+        </div>
+        <div class="fx-demo__right">
+          <div class="fx-idle" id="fxIdle" data-es="Elige una prueba de la izquierda para ver la nota, el desglose por objetivo y la evidencia del manuscrito." data-en="Pick a test on the left to see the grade, the breakdown by objective and the handwriting evidence.">Elige una prueba de la izquierda para ver la nota, el desglose por objetivo y la evidencia del manuscrito.</div>
+          <div class="fx-proc" id="fxProc" hidden>
+            <div class="st" id="fxProcSt"></div>
+            <div class="fx-pbar"><i id="fxProcFill"></i></div>
+          </div>
+          <div class="fx-res" id="fxRes">
+            <div class="fx-res__head">
+              <div class="who" id="fxWho"></div>
+              <div class="grade" id="fxGrade"></div>
+            </div>
+            <div id="fxRows"></div>
+            <div class="fx-evid" id="fxEvid"></div>
+            <div class="fx-kpis" id="fxKpis"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cor2">
+      <div class="dcard">
+        <div class="dhead">
+          <span class="tt" data-es="El mismo objetivo, en todo el colegio" data-en="The same objective, across the school">El mismo objetivo, en todo el colegio</span>
+          <span class="tg">OA-08 · <span data-es="Analizar" data-en="Analyze">Analizar</span></span>
+        </div>
+        <div class="cmp">
+          <span class="lb" data-es="Este estudiante" data-en="This student">Este estudiante</span>
+          <div class="tk"><div class="fl a" style="--w:50%">50%</div></div>
+          <span class="lb" data-es="Su curso" data-en="Their class">Su curso</span>
+          <div class="tk"><div class="fl b" style="--w:44%">44%</div></div>
+          <span class="lb" data-es="4° Medio completo" data-en="All of Grade 12">4° Medio completo</span>
+          <div class="tk"><div class="fl c" style="--w:47%">47%</div></div>
+        </div>
+        <div class="note warn" data-es="Los tres cursos de 4° Medio están bajo el 50% en el mismo objetivo." data-en="All three Grade 12 classes are under 50% on the same objective.">Los tres cursos de 4° Medio están bajo el 50% en el mismo objetivo.</div>
+      </div>
+
+      <div class="dcard">
+        <div class="dhead">
+          <span class="tt" data-es="Benchmark · colegios similares" data-en="Benchmark · similar schools">Benchmark · colegios similares</span>
+          <span class="tg" data-es="18 instituciones" data-en="18 institutions">18 instituciones</span>
+        </div>
+        <div class="cmp">
+          <span class="lb" data-es="Tu colegio" data-en="Your school">Tu colegio</span>
+          <div class="tk"><div class="fl a" style="--w:47%">47%</div></div>
+          <span class="lb" data-es="Mediana del grupo" data-en="Group median">Mediana del grupo</span>
+          <div class="tk"><div class="fl c" style="--w:61%">61%</div></div>
+          <span class="lb" data-es="Mejor cuartil" data-en="Top quartile">Mejor cuartil</span>
+          <div class="tk"><div class="fl b" style="--w:74%">74%</div></div>
+        </div>
+        <div class="note" data-es="Instituciones de tamaño y dependencia parecidos. Anónimo y agregado." data-en="Institutions of similar size and type. Anonymous and aggregated.">Instituciones de tamaño y dependencia parecidos. Anónimo y agregado.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PILA -->
+<section class="sec" id="pila" style="padding-top:0">
+  <div class="wrap rv">
+    <div class="fx-pile-wrap">
+      <div class="fx-pile-grid">
+        <div class="fx-pile-copy">
+          <div class="k" data-es="Un curso completo" data-en="One whole class">Un curso completo</div>
+          <h3 data-es="32 hojas entran. Tres cifras salen." data-en="32 sheets go in. Three figures come out.">32 hojas entran. Tres cifras salen.</h3>
+          <p data-es="Cada pregunta corregida alimenta el nivel de arriba: el perfil del estudiante, el mapa del curso, la cobertura curricular del colegio. Nadie tiene que llenar una planilla." data-en="Every graded question feeds the level above: the student profile, the class map, the school's curriculum coverage. Nobody has to fill in a spreadsheet.">Cada pregunta corregida alimenta el nivel de arriba: el perfil del estudiante, el mapa del curso, la cobertura curricular del colegio. Nadie tiene que llenar una planilla.</p>
+        </div>
+        <div class="fx-stage">
+          <div class="fx-pile" id="fxPile"></div>
+          <div class="fx-counter" id="fxCounter"><b>0</b> de 32 hojas procesadas</div>
+          <div class="fx-feed" id="fxFeed"></div>
+          <div class="fx-final" id="fxFinal">
+            <div class="k"><div class="v">5,4</div><div class="l" data-es="Promedio del curso" data-en="Class average">Promedio del curso</div></div>
+            <div class="k"><div class="v">#7 <em data-es="OA-08 · analizar" data-en="OA-08 · analyze">OA-08 · analizar</em></div><div class="l" data-es="Ítem con más errores · 21 de 32" data-en="Most-missed item · 21 of 32">Ítem con más errores · 21 de 32</div></div>
+            <div class="k"><div class="v">3 h 20 <em>min</em></div><div class="l" data-es="Tiempo devuelto al profesor" data-en="Time given back to the teacher">Tiempo devuelto al profesor</div></div>
+          </div>
+          <button class="fx-replay fx-pile-replay" id="fxPileReplay" type="button" data-es="Repetir" data-en="Replay">Repetir</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- COMO FUNCIONA -->
 <section class="sec price" id="como">
@@ -592,87 +805,6 @@ footer{background:var(--navy);color:var(--lt-45);padding:44px 0 40px;font-family
   </div>
 </section>
 
-<!-- 01 CORRIGE -->
-<section class="sec" id="corrige">
-  <div class="wrap rv">
-    <div class="vhead">
-      <span class="vnum">01</span>
-      <div>
-        <div class="kicker" data-es="Corrige" data-en="Grading">Corrige</div>
-        <h2 style="margin-top:.9rem;max-width:22ch" data-es="El sistema corrige pruebas manuscritas y de alternativas." data-en="The system grades handwritten and multiple choice tests.">El sistema corrige pruebas manuscritas y de alternativas.</h2>
-        <p class="lede" style="margin-top:1rem" data-es="La IA lee la letra del estudiante, aplica la rúbrica y explica el puntaje criterio por criterio." data-en="The AI reads the student's handwriting, applies the rubric and explains the score criterion by criterion.">La IA lee la letra del estudiante, aplica la rúbrica y explica el puntaje criterio por criterio.</p>
-      </div>
-    </div>
-
-    <div class="fx-demo">
-      <div class="fx-demo__bar">
-        <i></i><i></i><i></i><span class="path">timy.app / corrección / 4° Medio A</span>
-      </div>
-      <div class="fx-demo__body">
-        <div class="fx-demo__left">
-          <div class="fx-lbl" data-es="Entrada" data-en="Input">Entrada</div>
-          <div class="fx-drop">
-            <b data-es="Arrastra una prueba aplicada" data-en="Drag in a test you have given">Arrastra una prueba aplicada</b>
-            <span data-es="El PDF de la prueba que ya usa, o la hoja directo al escáner. No hay que rehacer ni digitar nada." data-en="The PDF of the test already in use, or the sheet straight into the scanner. Nothing to rebuild, nothing to type.">El PDF de la prueba que ya usa, o la hoja directo al escáner. No hay que rehacer ni digitar nada.</span>
-          </div>
-          <div class="fx-lbl" data-es="O prueba con una de estas" data-en="Or try one of these">O prueba con una de estas</div>
-          <div class="fx-samples" id="fxSamples"></div>
-        </div>
-        <div class="fx-demo__right">
-          <div class="fx-idle" id="fxIdle" data-es="Elige una prueba de la izquierda para ver la nota, el desglose por objetivo y la evidencia del manuscrito." data-en="Pick a test on the left to see the grade, the breakdown by objective and the handwriting evidence.">Elige una prueba de la izquierda para ver la nota, el desglose por objetivo y la evidencia del manuscrito.</div>
-          <div class="fx-proc" id="fxProc" hidden>
-            <div class="st" id="fxProcSt"></div>
-            <div class="fx-pbar"><i id="fxProcFill"></i></div>
-          </div>
-          <div class="fx-res" id="fxRes">
-            <div class="fx-res__head">
-              <div class="who" id="fxWho"></div>
-              <div class="grade" id="fxGrade"></div>
-            </div>
-            <div id="fxRows"></div>
-            <div class="fx-evid" id="fxEvid"></div>
-            <div class="fx-kpis" id="fxKpis"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="cor2">
-      <div class="dcard">
-        <div class="dhead">
-          <span class="tt" data-es="El mismo objetivo, en todo el colegio" data-en="The same objective, across the school">El mismo objetivo, en todo el colegio</span>
-          <span class="tg">OA-08 · <span data-es="Analizar" data-en="Analyze">Analizar</span></span>
-        </div>
-        <div class="cmp">
-          <span class="lb" data-es="Este estudiante" data-en="This student">Este estudiante</span>
-          <div class="tk"><div class="fl a" style="--w:50%">50%</div></div>
-          <span class="lb" data-es="Su curso" data-en="Their class">Su curso</span>
-          <div class="tk"><div class="fl b" style="--w:44%">44%</div></div>
-          <span class="lb" data-es="4° Medio completo" data-en="All of Grade 12">4° Medio completo</span>
-          <div class="tk"><div class="fl c" style="--w:47%">47%</div></div>
-        </div>
-        <div class="note warn" data-es="Los tres cursos de 4° Medio están bajo el 50% en el mismo objetivo." data-en="All three Grade 12 classes are under 50% on the same objective.">Los tres cursos de 4° Medio están bajo el 50% en el mismo objetivo.</div>
-      </div>
-
-      <div class="dcard">
-        <div class="dhead">
-          <span class="tt" data-es="Benchmark · colegios similares" data-en="Benchmark · similar schools">Benchmark · colegios similares</span>
-          <span class="tg" data-es="18 instituciones" data-en="18 institutions">18 instituciones</span>
-        </div>
-        <div class="cmp">
-          <span class="lb" data-es="Tu colegio" data-en="Your school">Tu colegio</span>
-          <div class="tk"><div class="fl a" style="--w:47%">47%</div></div>
-          <span class="lb" data-es="Mediana del grupo" data-en="Group median">Mediana del grupo</span>
-          <div class="tk"><div class="fl c" style="--w:61%">61%</div></div>
-          <span class="lb" data-es="Mejor cuartil" data-en="Top quartile">Mejor cuartil</span>
-          <div class="tk"><div class="fl b" style="--w:74%">74%</div></div>
-        </div>
-        <div class="note" data-es="Instituciones de tamaño y dependencia parecidos. Anónimo y agregado." data-en="Institutions of similar size and type. Anonymous and aggregated.">Instituciones de tamaño y dependencia parecidos. Anónimo y agregado.</div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- 02 CLASIFICA -->
 <section class="sec v2" id="clasifica">
   <div class="wrap rv">
@@ -733,27 +865,6 @@ footer{background:var(--navy);color:var(--lt-45);padding:44px 0 40px;font-family
     <div class="kicker" data-es="Dashboard" data-en="Dashboard">Dashboard</div>
     <h2 style="margin-top:1.2rem;max-width:22ch" data-es="Dashboard para cada nivel." data-en="A dashboard for every level.">Dashboard para cada nivel.</h2>
     <p class="lede" style="margin-top:1rem" data-es="Cada pregunta corregida alimenta el nivel de arriba. Nadie llena una planilla." data-en="Every graded question feeds the level above. Nobody fills in a spreadsheet.">Cada pregunta corregida alimenta el nivel de arriba. Nadie llena una planilla.</p>
-
-    <div class="fx-pile-wrap">
-      <div class="fx-pile-grid">
-        <div class="fx-pile-copy">
-          <div class="k" data-es="Un curso completo" data-en="One whole class">Un curso completo</div>
-          <h3 data-es="32 hojas entran. Tres cifras salen." data-en="32 sheets go in. Three figures come out.">32 hojas entran. Tres cifras salen.</h3>
-          <p data-es="Cada pregunta corregida alimenta el nivel de arriba: el perfil del estudiante, el mapa del curso, la cobertura curricular del colegio. Nadie tiene que llenar una planilla." data-en="Every graded question feeds the level above: the student profile, the class map, the school's curriculum coverage. Nobody has to fill in a spreadsheet.">Cada pregunta corregida alimenta el nivel de arriba: el perfil del estudiante, el mapa del curso, la cobertura curricular del colegio. Nadie tiene que llenar una planilla.</p>
-        </div>
-        <div class="fx-stage">
-          <div class="fx-pile" id="fxPile"></div>
-          <div class="fx-counter" id="fxCounter"><b>0</b> de 32 hojas procesadas</div>
-          <div class="fx-feed" id="fxFeed"></div>
-          <div class="fx-final" id="fxFinal">
-            <div class="k"><div class="v">5,4</div><div class="l" data-es="Promedio del curso" data-en="Class average">Promedio del curso</div></div>
-            <div class="k"><div class="v">#7 <em data-es="OA-08 · analizar" data-en="OA-08 · analyze">OA-08 · analizar</em></div><div class="l" data-es="Ítem con más errores · 21 de 32" data-en="Most-missed item · 21 of 32">Ítem con más errores · 21 de 32</div></div>
-            <div class="k"><div class="v">3 h 20 <em>min</em></div><div class="l" data-es="Tiempo devuelto al profesor" data-en="Time given back to the teacher">Tiempo devuelto al profesor</div></div>
-          </div>
-          <button class="fx-replay fx-pile-replay" id="fxPileReplay" type="button" data-es="Repetir" data-en="Replay">Repetir</button>
-        </div>
-      </div>
-    </div>
 
     <div class="dash4">
       <!-- estudiante -->
@@ -966,6 +1077,19 @@ window.fxRelang = function(){ relang.forEach(function(f){ try{ f(); }catch(e){} 
   var wrap = $('fxSamples');
   if(!wrap) return;
   var TESTS = [
+    { id:'quimica', img:'prueba-quimica-4m.jpg',
+      n:{es:'Química · letra difícil',en:'Chemistry · hard handwriting'},
+      s:{es:'Caligrafía apretada · tinta corrida',en:'Tight penmanship · smudged ink'},
+      who:{es:'Estudiante 22 · 4° Medio C',en:'Student 22 · Grade 12 C'},
+      sub:{es:'CN4M · lectura de manuscrito',en:'CN12 · handwriting reading'}, g:'4,8',
+      rows:[[{es:'Balance de ecuación redox',en:'Balancing a redox equation'},{es:'CN4M OA-01 · Aplicar',en:'CN12 OA-01 · Apply'},{es:'3/4 en desarrollo',en:'3/4 developing'},'mid'],
+            [{es:'Cálculo estequiométrico',en:'Stoichiometric calculation'},{es:'CN4M OA-02 · Aplicar',en:'CN12 OA-02 · Apply'},{es:'4/4 logrado',en:'4/4 achieved'},'ok'],
+            [{es:'Justificación del reactivo limitante',en:'Limiting reagent justification'},{es:'CN4M OA-03 · Analizar',en:'CN12 OA-03 · Analyze'},{es:'1/4 brecha',en:'1/4 gap'},'bad'],
+            [{es:'Unidades y cifras significativas',en:'Units and significant figures'},{es:'CN4M OA-01 · Recordar',en:'CN12 OA-01 · Recall'},{es:'2/4 brecha',en:'2/4 gap'},'bad']],
+      ev:{es:'“Dos dígitos ilegibles en el paso 3: Timy marca la zona y pide revisión humana en vez de asumir el valor.”',
+          en:'“Two illegible digits in step 3: Timy flags the area and asks for human review instead of assuming the value.”'},
+      kpis:[['5,6 s',{es:'Tiempo de proceso',en:'Processing time'}],['2',{es:'Zonas marcadas para revisar',en:'Areas flagged for review'}],['96%',{es:'Confianza de lectura',en:'Reading confidence'}]] },
+
     { id:'mate', img:'prueba-mate-4m.jpg',
       n:{es:'Matemática · 4° Medio',en:'Math · Grade 12'},
       s:{es:'4 desarrollo · 12 alternativas',en:'4 open · 12 multiple choice'},
@@ -990,20 +1114,7 @@ window.fxRelang = function(){ relang.forEach(function(f){ try{ f(); }catch(e){} 
             [{es:'Relación con el presente',en:'Link to the present'},{es:'LE4M OA-06 · Evaluar',en:'LE12 OA-06 · Evaluate'},{es:'40% brecha',en:'40% gap'},'bad']],
       ev:{es:'“Identifica la figura pero no explica su efecto en el lector. La conclusión repite la tesis sin evidencia nueva.”',
           en:'“It identifies the device but does not explain its effect on the reader. The conclusion repeats the thesis with no new evidence.”'},
-      kpis:[['3,8 s',{es:'Tiempo de proceso',en:'Processing time'}],['9 / 32',{es:'Con la misma brecha',en:'With the same gap'}],[{es:'Evaluar',en:'Evaluate'},{es:'Habilidad más débil',en:'Weakest skill'}]] },
-
-    { id:'quimica', img:'prueba-quimica-4m.jpg',
-      n:{es:'Química · letra difícil',en:'Chemistry · hard handwriting'},
-      s:{es:'Caligrafía apretada · tinta corrida',en:'Tight penmanship · smudged ink'},
-      who:{es:'Estudiante 22 · 4° Medio C',en:'Student 22 · Grade 12 C'},
-      sub:{es:'CN4M · lectura de manuscrito',en:'CN12 · handwriting reading'}, g:'4,8',
-      rows:[[{es:'Balance de ecuación redox',en:'Balancing a redox equation'},{es:'CN4M OA-01 · Aplicar',en:'CN12 OA-01 · Apply'},{es:'3/4 en desarrollo',en:'3/4 developing'},'mid'],
-            [{es:'Cálculo estequiométrico',en:'Stoichiometric calculation'},{es:'CN4M OA-02 · Aplicar',en:'CN12 OA-02 · Apply'},{es:'4/4 logrado',en:'4/4 achieved'},'ok'],
-            [{es:'Justificación del reactivo limitante',en:'Limiting reagent justification'},{es:'CN4M OA-03 · Analizar',en:'CN12 OA-03 · Analyze'},{es:'1/4 brecha',en:'1/4 gap'},'bad'],
-            [{es:'Unidades y cifras significativas',en:'Units and significant figures'},{es:'CN4M OA-01 · Recordar',en:'CN12 OA-01 · Recall'},{es:'2/4 brecha',en:'2/4 gap'},'bad']],
-      ev:{es:'“Dos dígitos ilegibles en el paso 3: Timy marca la zona y pide revisión humana en vez de asumir el valor.”',
-          en:'“Two illegible digits in step 3: Timy flags the area and asks for human review instead of assuming the value.”'},
-      kpis:[['5,6 s',{es:'Tiempo de proceso',en:'Processing time'}],['2',{es:'Zonas marcadas para revisar',en:'Areas flagged for review'}],['96%',{es:'Confianza de lectura',en:'Reading confidence'}]] }
+      kpis:[['3,8 s',{es:'Tiempo de proceso',en:'Processing time'}],['9 / 32',{es:'Con la misma brecha',en:'With the same gap'}],[{es:'Evaluar',en:'Evaluate'},{es:'Habilidad más débil',en:'Weakest skill'}]] }
   ];
   var STEPS = {
     es:['Detectando la hoja y los marcos','Separando pregunta por pregunta','Leyendo el desarrollo manuscrito','Aplicando la rúbrica','Etiquetando objetivo, habilidad y dificultad'],

@@ -1,0 +1,1281 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Timy paso a paso</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style id="css">
+/* Diseño claro, un solo tema (preferencia de Fabián: sin modo oscuro automático) */
+[hidden]{display:none!important}
+:root{
+  color-scheme:light;
+  --navy:#04142F; --navy-3:#0C2F66;
+  --blue:#1A55DB; --blue-2:#4682F5; --blue-3:#8FB4FA; --blue-4:#D6E3FB;
+  --ice:#F3F6FC; --ice-2:#E4EBF7; --ice-3:#CFDCF0;
+  --red:#D93A2B; --red-soft:rgba(217,58,43,.09);
+  --green:#1F8A6D; --amber:#D99A22;
+  --tx:#04142F; --tx-60:rgba(4,20,47,.60); --tx-40:rgba(4,20,47,.40);
+  --tx-15:rgba(4,20,47,.13); --tx-08:rgba(4,20,47,.07);
+  --bd:"IBM Plex Sans",Helvetica,Arial,sans-serif;
+  --mo:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  --ease:cubic-bezier(.2,.7,.3,1);
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;overflow:hidden;background:#fff}
+body{color:var(--tx);font-family:var(--bd);font-size:20px;line-height:1.45;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
+p{margin:0}
+h2,h3{margin:0;font-weight:600;letter-spacing:-.03em;line-height:1.04}
+button{font:inherit}
+body:not(.editing) .deck{-webkit-user-select:none;user-select:none}
+
+/* ============ ESCENARIO ============ */
+.viewport{position:fixed;inset:0;overflow:hidden;background:#fff}
+.stage{position:absolute;left:50%;top:50%;width:1600px;height:900px;transform:translate(-50%,-50%) scale(var(--s,1));transform-origin:50% 50%}
+.deck{position:absolute;inset:0}
+.slide{position:absolute;inset:0;padding:84px 104px 92px;display:flex;flex-direction:column;opacity:0;visibility:hidden;transition:opacity .7s ease,visibility 0s linear .7s}
+.slide.is-active{opacity:1;visibility:visible;transition:opacity .7s ease,visibility 0s}
+
+.kicker{font-family:var(--mo);font-size:15px;letter-spacing:.2em;text-transform:uppercase;color:var(--blue);display:flex;align-items:center;gap:14px;line-height:1.3}
+.kicker::before{content:"";width:30px;height:2px;background:var(--blue);flex:none}
+.ttl{font-size:58px;margin-top:22px;max-width:26ch}
+.sub{font-size:22px;line-height:1.45;color:var(--tx-60);margin-top:20px;max-width:30ch}
+
+.rise{opacity:0;transform:translateY(18px);transition:opacity .9s ease,transform 1s var(--ease);transition-delay:var(--d,0s)}
+.slide.is-active .rise{opacity:1;transform:none}
+.frag{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .7s var(--ease)}
+.frag.is-shown{opacity:1;transform:none}
+
+/* ============ 1-2 · EL PROBLEMA ============ */
+.pb{flex:1;display:grid;grid-template-columns:1fr auto;gap:56px;align-items:center;min-height:0}
+.pb-q{margin-top:64px}
+.pb-num{font-size:220px;font-weight:600;letter-spacing:-.055em;line-height:.8;color:var(--navy)}
+.pb-lbl{font-size:36px;line-height:1.2;color:var(--tx-60);margin-top:30px;max-width:15ch}
+.pb-photo{height:724px;display:flex;align-items:center;justify-content:center;padding:0 30px}
+.photo{height:680px;width:auto;border-radius:6px;transform:rotate(var(--r,-1.5deg));
+  box-shadow:0 0 0 1px rgba(4,20,47,.06),0 2px 4px rgba(4,20,47,.05),0 14px 30px rgba(4,20,47,.10),0 44px 90px rgba(4,20,47,.14)}
+
+/* ============ 3 · CARPETAS (Windows 10) ============ */
+.s-files .kicker{margin-bottom:30px}
+.win{align-self:center;width:1260px;height:640px;background:#fff;border:1px solid #1883D7;display:flex;flex-direction:column;overflow:hidden;
+  font-family:"Segoe UI","Selawik",system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;color:#1b1b1b;font-size:15px;line-height:1.2;
+  box-shadow:0 30px 80px rgba(4,20,47,.18),0 8px 22px rgba(4,20,47,.10)}
+.ico{width:18px;height:18px;flex:none}
+.ico.sm{width:15px;height:15px}
+.win-title{height:34px;display:flex;align-items:center;padding-left:10px;gap:10px;font-size:14px;flex:none}
+.win-title .qa{display:flex;align-items:center;gap:7px;padding-right:10px;border-right:1px solid #e3e3e3;color:#777;font-size:11px}
+.win-ctl{margin-left:auto;display:flex;height:100%}
+.win-ctl span{width:52px;display:flex;align-items:center;justify-content:center}
+.win-tabs{height:30px;display:flex;align-items:stretch;border-bottom:1px solid #e6e6e6;font-size:14px;flex:none}
+.win-tabs span{padding:0 16px;display:flex;align-items:center;color:#333}
+.win-tabs .file{background:#1979CA;color:#fff}
+.win-tabs .rt{margin-left:auto;color:#777;gap:14px}
+.win-addr{height:46px;display:flex;align-items:center;gap:10px;padding:0 10px;border-bottom:1px solid #f0f0f0;flex:none}
+.win-nav{display:flex;gap:16px;color:#9a9a9a;font-size:17px;padding:0 6px}
+.win-path{flex:1;height:30px;border:1px solid #d9d9d9;display:flex;align-items:center;gap:9px;padding:0 10px;font-size:14px;white-space:nowrap;overflow:hidden}
+.win-path .sep{color:#8a8a8a}
+.win-path .dd{margin-left:auto;color:#777;letter-spacing:.3em}
+.win-search{width:270px;height:30px;border:1px solid #d9d9d9;display:flex;align-items:center;justify-content:space-between;padding:0 10px;color:#8a8a8a;font-size:14px}
+.win-body{flex:1;display:flex;min-height:0}
+.win-side{width:230px;border-right:1px solid #f0f0f0;padding:8px 0;font-size:14px;flex:none}
+.win-side div{display:flex;align-items:center;gap:9px;padding:6px 14px}
+.win-side .in{padding-left:36px}
+.win-side .hi{background:#cce8ff}
+.win-side .gap{margin-top:10px}
+.win-main{flex:1;display:flex;flex-direction:column;min-width:0}
+.win-head,.win-row{display:grid;grid-template-columns:1fr 200px 250px 90px;align-items:center}
+.win-head{height:32px;color:#4c607a;font-size:14px;border-bottom:1px solid #f0f0f0;flex:none}
+.win-head span{padding:0 10px;border-right:1px solid #e5e5e5}
+.win-head span:last-child{border-right:0;text-align:right}
+.win-rows{padding-top:2px}
+.win-row{height:30px;font-size:14.5px;border:1px solid transparent;margin:0 2px}
+.win-row span{padding:0 10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#6d6d6d}
+.win-row span:first-child{color:#1b1b1b;display:flex;align-items:center;gap:10px}
+.win-row span:last-child{text-align:right}
+.win-row.sel{background:#cce8ff;border-color:#99d1ff}
+.win-status{height:28px;display:flex;align-items:center;gap:30px;padding:0 12px;font-size:13px;color:#333;border-top:1px solid #f3f3f3;flex:none}
+.slide.play .win-row{animation:rowin .5s var(--ease) both;animation-delay:calc(var(--i,0) * 55ms + .45s)}
+@keyframes rowin{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+/* ============ 4 · LA SOLUCIÓN ============ */
+.sol{flex:1;display:grid;grid-template-columns:450px 1fr;gap:76px;align-items:center;min-height:0}
+.sol-logo{width:400px;margin:46px 0 30px}
+.sol-lede{font-size:30px;line-height:1.3;color:var(--tx-60);max-width:15ch}
+.sol-photo{width:100%;border-radius:20px;box-shadow:0 0 0 1px rgba(4,20,47,.05),0 20px 50px rgba(4,20,47,.12),0 50px 100px rgba(4,20,47,.10)}
+
+/* ============ 5 · UNA PRUEBA (barrido) ============ */
+.sc{flex:1;display:grid;grid-template-columns:1fr 580px;gap:80px;align-items:center;min-height:0}
+.sc .fx-replay{margin-top:36px}
+.fx-scan{position:relative;width:580px}
+.fx-scan__sheet{position:relative;width:100%;aspect-ratio:1200/1480;border-radius:5px;overflow:hidden;background:#efece4;
+  box-shadow:0 0 0 1px rgba(4,20,47,.07),0 3px 6px rgba(4,20,47,.03),0 16px 28px rgba(4,20,47,.05),0 40px 80px rgba(4,20,47,.08)}
+.fx-scan__sheet img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top center}
+.fx-scan__data{position:absolute;inset:0;background:#fff;clip-path:inset(0 0 100% 0);will-change:clip-path;padding:30px 30px 108px;display:flex;flex-direction:column}
+.fx-scan__head{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid var(--tx-15);padding-bottom:16px;margin-bottom:6px}
+.fx-scan__head .t{font-family:var(--mo);font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--tx-60);line-height:1.6}
+.fx-scan__head .n{font-weight:600;font-size:58px;letter-spacing:-.03em;line-height:1;color:var(--blue)}
+.fx-row{display:grid;grid-template-columns:1fr auto;gap:14px;align-items:center;padding:16px 0;border-bottom:1px solid var(--tx-08)}
+.fx-row .q{font-size:18px;font-weight:500;line-height:1.3}
+.fx-row .q span{display:block;font-family:var(--mo);font-size:12.5px;letter-spacing:.06em;color:var(--tx-40);margin-top:5px;font-weight:400}
+.fx-chip{font-family:var(--mo);font-size:13px;letter-spacing:.04em;padding:5px 11px;border-radius:5px;white-space:nowrap}
+.fx-chip--ok{color:var(--green);background:rgba(31,138,109,.10)}
+.fx-chip--mid{color:#8C6110;background:rgba(217,154,34,.14)}
+.fx-chip--bad{color:var(--red);background:var(--red-soft)}
+.fx-evid{margin-top:auto;border-left:3px solid var(--blue);padding:12px 0 12px 16px;font-size:16px;line-height:1.55;color:var(--tx-60)}
+.fx-evid b{display:block;font-family:var(--mo);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);margin-bottom:6px;font-weight:500}
+.fx-scan__beam{position:absolute;left:-2%;right:-2%;top:0;height:3px;background:var(--blue);box-shadow:0 0 26px 7px rgba(26,85,219,.45);opacity:0;z-index:3}
+.fx-scan__beam::after{content:"";position:absolute;left:0;right:0;top:3px;height:110px;background:linear-gradient(180deg,rgba(26,85,219,.16),transparent)}
+.fx-scan__badge{position:absolute;left:-24px;bottom:40px;background:#fff;z-index:4;padding:14px 18px;display:flex;align-items:center;gap:12px;border-radius:6px;
+  box-shadow:0 0 0 1px rgba(4,20,47,.07),0 8px 20px rgba(4,20,47,.10),0 24px 48px rgba(4,20,47,.10)}
+.fx-scan__badge .dot{width:8px;height:8px;border-radius:50%;background:var(--blue);animation:fx-pulse 1.4s infinite}
+@keyframes fx-pulse{0%,100%{opacity:1}50%{opacity:.25}}
+.fx-scan__badge .lbl{font-family:var(--mo);font-size:13px;letter-spacing:.09em;text-transform:uppercase;color:var(--tx-60)}
+.fx-scan__badge .val{font-family:var(--mo);font-size:15px;color:var(--tx)}
+.fx-replay{background:none;border:0;padding:0;cursor:pointer;font-family:var(--mo);font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);border-bottom:1px solid transparent}
+.fx-replay:hover{border-color:var(--blue)}
+
+/* ============ 6 · UN CURSO COMPLETO (pila) ============ */
+.fx-pile-wrap{flex:1;position:relative;background:var(--ice);border-radius:24px;padding:60px 64px;overflow:hidden;min-height:0}
+.fx-pile-wrap::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.05;mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='150'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='150' height='150' filter='url(%23n)'/%3E%3C/svg%3E")}
+.fx-pile-grid{position:relative;z-index:2;height:100%;display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:56px;align-items:center}
+.fx-pile-copy h3{font-size:52px;line-height:1.04;letter-spacing:-.035em;margin:24px 0 22px;max-width:12ch}
+.fx-pile-copy p{font-size:20px;line-height:1.55;color:var(--tx-60);max-width:26ch}
+.fx-stage{position:relative;height:560px}
+.fx-pile{position:absolute;left:0;top:50%;transform:translateY(-50%);width:270px;height:360px}
+.fx-pg{position:absolute;inset:0;border-radius:3px;overflow:hidden;background:#e9e5db;box-shadow:0 1px 2px rgba(4,20,47,.14),0 6px 18px rgba(4,20,47,.12);
+  transition:transform .9s cubic-bezier(.3,1,.35,1),opacity .6s ease;will-change:transform,opacity}
+.fx-pg img{width:100%;height:100%;object-fit:cover;object-position:top center}
+.fx-pg.is-gone{opacity:0}
+.fx-counter{position:absolute;left:0;bottom:0;font-family:var(--mo);font-size:14px;letter-spacing:.08em;color:var(--tx-40)}
+.fx-counter b{color:var(--blue);font-weight:500}
+.fx-feed{position:absolute;right:0;top:40px;width:430px}
+.fx-fr{display:grid;grid-template-columns:30px 1fr auto;gap:12px;align-items:center;padding:10px 0;border-bottom:1px solid var(--tx-08);
+  opacity:0;transform:translateX(14px);transition:opacity .5s var(--ease),transform .5s var(--ease)}
+.fx-fr.is-in{opacity:1;transform:none}
+.fx-fr .i{font-family:var(--mo);font-size:12px;color:var(--tx-40)}
+.fx-fr .nm{font-size:15px}
+.fx-fr .nm span{display:block;font-family:var(--mo);font-size:12px;letter-spacing:.05em;color:var(--tx-40);margin-top:3px}
+.fx-fr .g{font-family:var(--mo);font-size:15px;color:var(--tx-60)}
+.fx-fr .g.ok{color:var(--green)}
+.fx-fr .g.bad{color:var(--red)}
+.fx-final{position:absolute;right:0;top:50%;transform:translateY(-50%);width:500px;display:grid;gap:1px;background:var(--tx-08);border-radius:8px;overflow:hidden;opacity:0;pointer-events:none;transition:opacity .8s}
+.fx-final.is-in{opacity:1}
+.fx-final .k{background:#fff;padding:24px 26px}
+.fx-final .k .v{font-weight:600;font-size:46px;letter-spacing:-.028em;line-height:1}
+.fx-final .k .v em{font-style:normal;font-family:var(--mo);font-size:.4em;letter-spacing:.02em;color:var(--tx-40);margin-left:10px}
+.fx-final .k .l{font-family:var(--mo);font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--tx-40);margin-top:10px}
+.fx-pile-replay{position:absolute;right:0;bottom:0}
+
+/* ============ 7 · EJEMPLOS (demo) ============ */
+.fx-demo{margin-top:28px;flex:1;min-height:0;background:#fff;border:1px solid var(--tx-15);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;
+  box-shadow:0 1px 2px rgba(4,20,47,.03),0 8px 18px rgba(4,20,47,.04),0 24px 56px rgba(4,20,47,.07)}
+.fx-demo__bar{display:flex;align-items:center;gap:9px;padding:13px 18px;border-bottom:1px solid var(--tx-08);background:var(--ice);flex:none}
+.fx-demo__bar i{width:11px;height:11px;border-radius:50%;background:var(--tx-15);display:block}
+.fx-demo__bar .path{font-family:var(--mo);font-size:13px;color:var(--tx-40);margin-left:12px}
+.fx-demo__body{flex:1;display:grid;grid-template-columns:400px 1fr;min-height:0}
+.fx-demo__left{border-right:1px solid var(--tx-08);padding:26px 24px;display:flex;flex-direction:column;gap:16px}
+.fx-lbl{font-family:var(--mo);font-size:12px;letter-spacing:.11em;text-transform:uppercase;color:var(--tx-40)}
+.fx-samples{display:flex;flex-direction:column;gap:12px}
+.fx-samp{display:flex;gap:16px;align-items:center;text-align:left;cursor:pointer;background:#fff;border:1px solid var(--tx-08);border-radius:12px;padding:12px;color:var(--tx);transition:border-color .18s,background .18s}
+.fx-samp:hover{border-color:var(--blue-3)}
+.fx-samp[aria-pressed="true"]{border-color:var(--blue);background:rgba(26,85,219,.05)}
+.fx-samp img{width:84px;height:110px;object-fit:cover;object-position:top center;border-radius:4px;flex:none;box-shadow:0 1px 3px rgba(4,20,47,.12)}
+.fx-samp .n{font-size:17px;font-weight:500;line-height:1.3}
+.fx-samp .s{display:block;font-family:var(--mo);font-size:12px;letter-spacing:.03em;color:var(--tx-40);margin-top:6px;line-height:1.4;font-weight:400}
+.fx-demo__right{padding:26px 32px;display:flex;flex-direction:column;min-height:0}
+.fx-idle{margin:auto;text-align:center;font-size:17px;line-height:1.6;color:var(--tx-40);max-width:30ch}
+.fx-proc{margin:auto;width:100%;max-width:420px;text-align:center}
+.fx-proc .st{font-family:var(--mo);font-size:14px;letter-spacing:.05em;color:var(--tx-60);height:22px;margin-bottom:16px}
+.fx-pbar{height:3px;background:var(--tx-08);position:relative;overflow:hidden}
+.fx-pbar i{position:absolute;inset:0 auto 0 0;width:0;background:var(--blue);display:block}
+.fx-res{display:none;flex-direction:column;height:100%}
+.fx-res.is-on{display:flex}
+.fx-res__head{display:flex;justify-content:space-between;align-items:flex-end;border-bottom:1px solid var(--tx-08);padding-bottom:16px}
+.fx-who{font-size:18px;font-weight:500}
+.fx-who span{display:block;font-family:var(--mo);font-size:12.5px;letter-spacing:.06em;color:var(--tx-40);margin-top:6px;font-weight:400}
+.fx-grade{font-weight:600;font-size:60px;letter-spacing:-.03em;line-height:.9;text-align:right;color:var(--blue)}
+.fx-grade span{display:block;font-family:var(--mo);font-size:12px;font-weight:400;letter-spacing:.1em;color:var(--tx-40);margin-top:8px}
+.fx-res .fx-row{opacity:0;transform:translateY(6px);transition:opacity .45s var(--ease),transform .45s var(--ease);padding:13px 0}
+.fx-res .fx-row.is-in{opacity:1;transform:none}
+.fx-res .fx-evid{margin-top:16px;background:var(--ice);padding:13px 16px;opacity:0;transition:opacity .5s}
+.fx-res .fx-evid.is-in{opacity:1}
+.fx-kpis{margin-top:auto;padding-top:16px;display:flex;gap:44px;border-top:1px solid var(--tx-08)}
+.fx-kpi .v{font-weight:600;font-size:26px;letter-spacing:-.03em}
+.fx-kpi .k{font-family:var(--mo);font-size:12px;letter-spacing:.09em;text-transform:uppercase;color:var(--tx-40);margin-top:4px}
+
+/* ============ 8 · PASO A PASO ============ */
+.tl{margin-top:62px;position:relative}
+.tl::before{content:"";position:absolute;left:52px;right:52px;top:52px;height:2px;background:var(--ice-2)}
+.tlg{display:grid;grid-template-columns:repeat(4,1fr);gap:44px;position:relative}
+.mi .ic{width:104px;height:104px;border:2px solid var(--ice-2);border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;position:relative;z-index:2;transition:border-color .6s}
+.mi.is-shown .ic{border-color:var(--blue)}
+.mi .ic svg{width:48px;height:48px}
+.mi .st{font-family:var(--mo);font-size:14px;letter-spacing:.18em;color:var(--blue);display:block;margin:26px 0 10px}
+.mi h3{font-size:27px;line-height:1.12;letter-spacing:-.02em;margin-bottom:12px}
+.mi p{font-size:18px;color:var(--tx-60);line-height:1.45}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.chips span{font-family:var(--mo);font-size:12.5px;letter-spacing:.03em;padding:5px 10px;border-radius:5px;background:var(--ice);color:var(--navy-3);border:1px solid var(--ice-2)}
+.tl-note{margin-top:48px;border:1px dashed var(--ice-3);border-radius:10px;padding:18px 22px;background:var(--ice);display:flex;gap:18px;align-items:baseline;font-size:18px;color:var(--tx-60)}
+.tl-note b{font-family:var(--mo);font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--blue);font-weight:500;white-space:nowrap}
+
+/* ============ 9 · DESGLOSE ============ */
+.dg{flex:1;display:grid;grid-template-columns:440px 1fr;gap:72px;align-items:center;min-height:0;margin-top:30px}
+.frame{position:relative;border:1px solid var(--tx-15);border-radius:6px;overflow:hidden;background:#fff;box-shadow:0 18px 44px rgba(4,20,47,.13)}
+.frame img{width:100%;height:560px;object-fit:cover;object-position:top center}
+.frame .cap{position:absolute;left:14px;top:14px;background:var(--navy);color:#fff;font-family:var(--mo);font-size:12px;letter-spacing:.14em;text-transform:uppercase;padding:7px 10px;border-radius:3px}
+.mlab{font-family:var(--mo);font-size:13px;text-transform:uppercase;letter-spacing:.2em;color:var(--tx-40);margin-bottom:16px}
+.tf{display:grid;grid-template-columns:auto 50px 1fr;gap:26px;align-items:center;background:#fff;border:1px solid var(--tx-15);border-radius:8px;padding:28px 30px}
+.tf .old{text-align:center}
+.tf .old b{font-size:84px;font-weight:700;letter-spacing:-.03em;display:block;line-height:.85;color:var(--ice-3)}
+.tf .old span{font-family:var(--mo);font-size:12px;text-transform:uppercase;letter-spacing:.14em;color:var(--tx-40)}
+.tf .ar{font-family:var(--mo);color:var(--ice-3);font-size:34px;text-align:center}
+.bar-r{margin-bottom:16px}
+.bar-r:last-child{margin-bottom:0}
+.bt{display:flex;justify-content:space-between;gap:10px;font-family:var(--mo);font-size:14px;margin-bottom:7px;letter-spacing:.02em;color:var(--tx-60)}
+.bt b{color:var(--tx);font-weight:500}
+.track{height:10px;background:var(--ice-2);border-radius:99px;overflow:hidden}
+.fill{height:100%;border-radius:99px;background:var(--blue);width:0}
+.fill.warn{background:var(--amber)}
+.fill.alert{background:var(--red)}
+.dcard{border:1px solid var(--tx-15);border-radius:8px;background:#fff;padding:22px 26px;margin-top:20px}
+.dhead{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding-bottom:14px;border-bottom:1px solid var(--tx-08);margin-bottom:18px}
+.dhead .tt{font-weight:700;font-size:18px}
+.dhead .tg{font-family:var(--mo);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--tx-40)}
+.cmp{display:grid;grid-template-columns:110px 1fr;gap:12px 16px;align-items:center;font-family:var(--mo);font-size:14px}
+.cmp .lb{color:var(--tx-60)}
+.cmp .tk{height:26px;background:var(--ice);border-radius:3px;position:relative;overflow:hidden}
+.cmp .fl{position:absolute;left:0;top:0;bottom:0;border-radius:3px;width:0;display:flex;align-items:center;justify-content:flex-end;padding-right:8px;color:#fff;font-size:13px}
+.cmp .fl.a{background:var(--blue)}
+.cmp .fl.c{background:var(--ice-3);color:var(--tx-60)}
+.legend{display:flex;gap:18px;flex-wrap:wrap;font-family:var(--mo);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--tx-40);margin-top:16px}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;vertical-align:-1px}
+
+/* barras: arrancan al llegar a la lámina */
+.slide.play .fill,.slide.play .cmp .fl{animation:gw 1.2s var(--ease) .35s forwards}
+.slide.play .frag:not(.is-shown) .fill{animation:none}
+@keyframes gw{to{width:var(--w)}}
+
+/* ============ 10 · DASHBOARD ============ */
+.dash4{flex:1;display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:40px;min-height:0;align-items:start}
+.dp{border:1px solid var(--tx-15);border-radius:10px;padding:24px 22px;background:#fff}
+.dp .lv{font-family:var(--mo);font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--blue);display:block;margin-bottom:8px}
+.dp h3{margin-bottom:22px;font-size:25px}
+.dp .bt{font-size:13px}
+.kpi2{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--tx-08);border:1px solid var(--tx-08);border-radius:4px;overflow:hidden;margin-top:20px}
+.kpi2 > div{background:#fff;padding:14px}
+.kpi2 b{font-size:28px;font-weight:700;letter-spacing:-.025em;display:block;line-height:1;color:var(--blue)}
+.kpi2 span{font-family:var(--mo);font-size:11px;text-transform:uppercase;letter-spacing:.12em;color:var(--tx-40);display:block;margin-top:7px;line-height:1.45}
+.hm{display:grid;gap:4px;font-family:var(--mo);font-size:11px}
+.hm .hh{color:var(--tx-40);text-align:center;padding-bottom:4px;letter-spacing:.06em}
+.hm .rl{color:var(--tx-60);display:flex;align-items:center;font-size:11.5px;white-space:nowrap;overflow:hidden}
+.cell{height:30px;border-radius:3px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:11px}
+.c1{background:#D93A2B}.c2{background:#E07A2B}.c3{background:#D9A922}
+.c4{background:#8FB4FA;color:#04142F}.c5{background:#4682F5}.c6{background:#1A55DB}
+.note{margin-top:18px;font-size:15px;color:var(--tx-60);line-height:1.42;border-left:3px solid var(--ice-3);padding-left:12px}
+.note.warn{border-color:var(--red);color:var(--tx)}
+
+/* ============ 11 · CIERRE ============ */
+.end{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.end img{width:520px}
+.end p{font-size:30px;color:var(--tx-60);margin-top:40px}
+
+/* lámina nueva del editor */
+.s-free .ttl{margin-top:30px}
+
+/* ============ NAVEGACIÓN ============ */
+.prog{position:fixed;left:0;bottom:0;height:3px;width:0;background:var(--blue);z-index:61;transition:width .5s var(--ease)}
+.hud{position:fixed;right:22px;bottom:calc(18px + env(safe-area-inset-bottom, 0px));z-index:60;display:flex;align-items:center;gap:10px;transition:opacity .4s}
+.hud button{width:38px;height:38px;border-radius:50%;border:1px solid var(--tx-15);background:rgba(255,255,255,.92);color:var(--tx);cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0}
+.hud button:hover{border-color:var(--blue);color:var(--blue)}
+.hud svg{width:16px;height:16px}
+.hud .ctr{font-family:var(--mo);font-size:12px;letter-spacing:.1em;color:var(--tx-40);min-width:70px;text-align:center}
+body.idle .hud,body.idle .efab{opacity:0;pointer-events:none}
+body.idle{cursor:none}
+
+/* ============ EDITOR ============ */
+.ebar{position:fixed;left:0;right:0;top:0;z-index:100;display:none;align-items:center;gap:8px;padding:calc(10px + env(safe-area-inset-top, 0px)) 16px 10px;background:var(--navy);box-shadow:0 4px 18px rgba(0,0,0,.2);flex-wrap:wrap}
+body.editing .ebar{display:flex}
+.ebar .t{color:rgba(255,255,255,.72);font-size:13px;font-weight:600;letter-spacing:.04em;margin-right:auto}
+.ebar button{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);color:#fff;border-radius:7px;padding:7px 12px;font-size:13px;font-weight:600;cursor:pointer}
+.ebar button:hover{background:rgba(255,255,255,.2)}
+.ebar .go{background:var(--blue);border-color:var(--blue)}
+.ebar .danger{background:rgba(217,58,43,.3);border-color:rgba(217,58,43,.5)}
+.ebar button.armed{background:var(--red);border-color:var(--red)}
+.ebar button:disabled{opacity:.5;cursor:default}
+.efab{position:fixed;top:calc(16px + env(safe-area-inset-top, 0px));right:18px;z-index:90;background:#fff;border:1px solid var(--tx-15);border-radius:999px;padding:8px 15px;font-size:13px;font-weight:600;color:var(--blue);cursor:pointer;box-shadow:0 6px 18px rgba(4,20,47,.10);transition:opacity .4s}
+body.editing .efab{display:none}
+body.editing [data-edit]{outline:1.5px dashed rgba(26,85,219,.45);outline-offset:4px;border-radius:3px}
+body.editing [data-edit]:focus{outline:2px solid var(--blue);background:rgba(26,85,219,.04)}
+body.editing .frag,body.editing .rise{opacity:1!important;transform:none!important}
+body.editing .fill,body.editing .cmp .fl{animation:none!important;width:var(--w)!important}
+.toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--navy);color:#fff;padding:11px 20px;border-radius:10px;font-size:14px;font-weight:600;z-index:300;opacity:0;transition:all .3s ease;box-shadow:0 6px 24px rgba(0,0,0,.25);pointer-events:none}
+.toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+
+/* ============ CELULAR (modo flujo) ============ */
+html.flow .stage{left:0;top:0;width:100%;height:100%;transform:none}
+html.flow body{font-size:16px}
+html.flow .slide{padding:60px 18px 96px;overflow-y:auto;overflow-x:hidden;display:block;-webkit-overflow-scrolling:touch}
+html.flow .frag{opacity:1;transform:none}
+html.flow .kicker{font-size:11px;gap:10px}
+html.flow .kicker::before{width:20px}
+html.flow .ttl{font-size:30px;margin-top:14px}
+html.flow .sub{font-size:16px;margin-top:12px}
+html.flow .pb{display:block}
+html.flow .pb-q{margin-top:26px}
+html.flow .pb-num{font-size:104px}
+html.flow .pb-lbl{font-size:20px;margin-top:14px}
+html.flow .pb-photo{height:auto;padding:0;margin-top:32px}
+html.flow .photo{height:auto;width:80%;max-width:340px;margin:0 auto}
+html.flow .s-files .kicker{margin-bottom:18px}
+html.flow .win{width:100%;height:auto;font-size:12px}
+html.flow .win-side,html.flow .win-search,html.flow .win-tabs .rt,html.flow .win-title .qa,
+html.flow .win-head span:nth-child(2),html.flow .win-row span:nth-child(2),
+html.flow .win-head span:nth-child(3),html.flow .win-row span:nth-child(3){display:none}
+html.flow .win-head,html.flow .win-row{grid-template-columns:1fr 62px}
+html.flow .win-row{height:30px;font-size:12.5px}
+html.flow .win-ctl span{width:34px}
+html.flow .win-tabs span{padding:0 9px;font-size:12px}
+html.flow .win-nav{gap:10px;font-size:14px}
+html.flow .win-path{font-size:11px}
+html.flow .win-status{gap:14px;font-size:11px}
+html.flow .sol{display:block}
+html.flow .sol-logo{width:200px;margin:22px 0 14px}
+html.flow .sol-lede{font-size:18px}
+html.flow .sol-photo{margin-top:24px;border-radius:12px}
+html.flow .sc{display:block}
+html.flow .sc .fx-replay{margin-top:14px}
+html.flow .fx-scan{width:100%;margin-top:24px}
+html.flow .fx-scan__sheet{aspect-ratio:1200/1560}
+html.flow .fx-scan__data{padding:14px 13px 60px}
+html.flow .fx-scan__head .n{font-size:28px}
+html.flow .fx-scan__head .t{font-size:9px}
+html.flow .fx-row{padding:9px 0}
+html.flow .fx-row .q{font-size:12px}
+html.flow .fx-row .q span{font-size:9px}
+html.flow .fx-chip{font-size:9px;padding:3px 6px}
+html.flow .fx-evid{font-size:11px;padding:8px 0 8px 10px}
+html.flow .fx-evid b{font-size:9px}
+html.flow .fx-scan__badge{left:0;bottom:10px;padding:8px 11px;gap:8px}
+html.flow .fx-scan__badge .lbl{font-size:9px}
+html.flow .fx-scan__badge .val{font-size:10px}
+html.flow .fx-pile-wrap{padding:24px 16px 34px;border-radius:14px}
+html.flow .fx-pile-grid{display:block}
+html.flow .fx-pile-copy h3{font-size:26px;margin:14px 0 10px}
+html.flow .fx-pile-copy p{font-size:15px}
+html.flow .fx-stage{height:300px;margin-top:22px}
+html.flow .fx-pile{width:112px;height:150px;left:0;top:auto;bottom:38px;transform:none}
+html.flow .fx-feed{width:60%;top:0}
+html.flow .fx-fr{grid-template-columns:18px 1fr auto;gap:7px;padding:5px 0}
+html.flow .fx-fr .nm{font-size:10px}
+html.flow .fx-fr .nm span{font-size:8px}
+html.flow .fx-fr .g,html.flow .fx-fr .i{font-size:10px}
+html.flow .fx-final{width:100%;top:44%}
+html.flow .fx-final .k{padding:13px 14px}
+html.flow .fx-final .k .v{font-size:26px}
+html.flow .fx-final .k .l{font-size:9px}
+html.flow .fx-counter{font-size:10px}
+html.flow .fx-demo{margin-top:18px;border-radius:10px}
+html.flow .fx-demo__body{display:block}
+html.flow .fx-demo__left{border-right:0;border-bottom:1px solid var(--tx-08);padding:14px;gap:10px}
+html.flow .fx-samp{padding:9px}
+html.flow .fx-samp img{width:50px;height:66px}
+html.flow .fx-samp .n{font-size:14px}
+html.flow .fx-samp .s{font-size:10px}
+html.flow .fx-demo__right{padding:16px 14px;min-height:430px}
+html.flow .fx-grade{font-size:36px}
+html.flow .fx-who{font-size:14px}
+html.flow .fx-res .fx-row{padding:9px 0}
+html.flow .fx-kpis{gap:18px}
+html.flow .fx-kpi .v{font-size:17px}
+html.flow .fx-kpi .k{font-size:9px}
+html.flow .tl{margin-top:26px}
+html.flow .tl::before{display:none}
+html.flow .tlg{grid-template-columns:1fr;gap:26px}
+html.flow .mi .ic{width:60px;height:60px}
+html.flow .mi .ic svg{width:28px;height:28px}
+html.flow .mi .st{margin:12px 0 6px}
+html.flow .mi h3{font-size:19px}
+html.flow .mi p{font-size:15px}
+html.flow .chips span{font-size:10px}
+html.flow .tl-note{margin-top:26px;font-size:15px;display:block}
+html.flow .tl-note b{display:block;margin-bottom:6px}
+html.flow .dg{display:block;margin-top:20px}
+html.flow .dg > div + div{margin-top:22px}
+html.flow .frame img{height:auto}
+html.flow .tf{grid-template-columns:1fr;gap:12px;padding:16px}
+html.flow .tf .ar{display:none}
+html.flow .tf .old b{font-size:52px}
+html.flow .bt{font-size:11px}
+html.flow .cmp{grid-template-columns:70px 1fr;font-size:11px}
+html.flow .dash4{grid-template-columns:1fr;gap:14px;margin-top:20px}
+html.flow .dp{padding:17px 15px}
+html.flow .dp .hm{grid-template-columns:86px repeat(6,1fr)!important}
+html.flow .hm .rl{font-size:10px}
+html.flow .end{min-height:70vh}
+html.flow .end img{width:240px}
+html.flow .end p{font-size:18px}
+html.flow .hud{right:12px;bottom:calc(12px + env(safe-area-inset-bottom, 0px))}
+html.flow .efab{top:calc(10px + env(safe-area-inset-top, 0px));right:10px}
+</style>
+</head>
+<body>
+
+<!-- íconos (Windows 10) -->
+<svg id="sprite" width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-folder" viewBox="0 0 24 24"><path d="M2 5.5A1.5 1.5 0 0 1 3.5 4h5.3l2 2h9.7A1.5 1.5 0 0 1 22 7.5V18a1.5 1.5 0 0 1-1.5 1.5h-17A1.5 1.5 0 0 1 2 18z" fill="#E8B43A"/><path d="M2 8.5h20V18a1.5 1.5 0 0 1-1.5 1.5h-17A1.5 1.5 0 0 1 2 18z" fill="#FFCF56"/></symbol>
+  <symbol id="i-word" viewBox="0 0 24 24"><path d="M7 2.5h9.5L21 7v14a.5.5 0 0 1-.5.5H7a.5.5 0 0 1-.5-.5V3a.5.5 0 0 1 .5-.5z" fill="#fff" stroke="#A7B3C2"/><path d="M16.5 2.5V7H21" fill="none" stroke="#A7B3C2"/><path d="M13.5 10.5h5M13.5 13.5h5M13.5 16.5h5" stroke="#9FB6D8" stroke-width="1.2"/><rect x="2" y="7.5" width="11" height="10" rx="1.2" fill="#2B579A"/><path d="M4.2 10l1.4 5 1.4-4 1.4 4 1.4-5" fill="none" stroke="#fff" stroke-width="1.3" stroke-linejoin="round" stroke-linecap="round"/></symbol>
+  <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 3l2.6 5.6 6 .7-4.5 4.1 1.2 6L12 16.4 6.7 19.4l1.2-6L3.4 9.3l6-.7z" fill="#2F7CD9"/></symbol>
+  <symbol id="i-desk" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="12" rx="1" fill="#3B8FE0"/><rect x="8" y="18.5" width="8" height="1.6" fill="#7A8594"/></symbol>
+  <symbol id="i-down" viewBox="0 0 24 24"><path d="M12 4v11m0 0l-4.5-4.5M12 15l4.5-4.5" stroke="#2F7CD9" stroke-width="2.2" fill="none" stroke-linecap="round"/><path d="M5 19.5h14" stroke="#2F7CD9" stroke-width="2.2" stroke-linecap="round"/></symbol>
+  <symbol id="i-docs" viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6z" fill="#fff" stroke="#8A97A8"/><path d="M9 11h6M9 14h6M9 17h4" stroke="#8A97A8"/></symbol>
+  <symbol id="i-pics" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="1.5" fill="#3AA0E6"/><path d="M4 18l5-6 4 4 3-3 4 5z" fill="#1E6FB8"/><circle cx="16" cy="9" r="1.8" fill="#FFE27A"/></symbol>
+  <symbol id="i-cloud" viewBox="0 0 24 24"><path d="M7 18h11a4 4 0 0 0 .5-7.97A6 6 0 0 0 7.1 9.5 4.3 4.3 0 0 0 7 18z" fill="#1F7FD8"/></symbol>
+  <symbol id="i-pc" viewBox="0 0 24 24"><rect x="3" y="4.5" width="18" height="12" rx="1" fill="#3B8FE0"/><path d="M9 20h6M12 16.5V20" stroke="#6B7686" stroke-width="1.6"/></symbol>
+  <symbol id="i-net" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="5" fill="#3B8FE0"/><rect x="3" y="15" width="6" height="5" fill="#3B8FE0"/><rect x="15" y="15" width="6" height="5" fill="#3B8FE0"/><path d="M12 8v4M6 15v-3h12v3" stroke="#6B7686" stroke-width="1.5" fill="none"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6" fill="none" stroke="#666" stroke-width="1.8"/><path d="M15 15l5 5" stroke="#666" stroke-width="1.8" stroke-linecap="round"/></symbol>
+</svg>
+
+<div class="viewport">
+<div class="stage">
+<div class="deck" id="deck">
+
+<!-- 1 · El problema del profe de colegio -->
+<section class="slide s-pb">
+  <div class="pb">
+    <div class="pb-copy">
+      <div class="kicker rise" data-edit>El problema del profe de colegio</div>
+      <div class="pb-q frag">
+        <div class="pb-num" data-edit>100</div>
+        <div class="pb-lbl" data-edit>pruebas a mano, cada semana</div>
+      </div>
+    </div>
+    <div class="pb-photo rise" style="--d:.15s">
+      <img class="photo" style="--r:-1.6deg" data-img="prueba-quimica-4m.jpg" alt="Prueba de química de 4° Medio respondida a mano">
+    </div>
+  </div>
+</section>
+
+<!-- 2 · El problema del profe de universidad -->
+<section class="slide s-pb">
+  <div class="pb">
+    <div class="pb-copy">
+      <div class="kicker rise" data-edit>El problema del profe de universidad</div>
+      <div class="pb-q frag">
+        <div class="pb-num" data-edit>150</div>
+        <div class="pb-lbl" data-edit>certámenes a mano en cada evaluación</div>
+      </div>
+    </div>
+    <div class="pb-photo rise" style="--d:.15s">
+      <img class="photo" style="--r:1.4deg" data-img="prueba-eco210.jpg" alt="Certamen universitario de economía escrito a mano">
+    </div>
+  </div>
+</section>
+
+<!-- 3 · El otro problema -->
+<section class="slide s-files">
+  <div class="kicker rise" data-edit>El otro problema</div>
+  <div class="win rise" style="--d:.15s">
+    <div class="win-title">
+      <div class="qa"><svg class="ico sm"><use href="#i-folder"/></svg><span>▾</span></div>
+      <span>Pruebas</span>
+      <div class="win-ctl">
+        <span><svg width="12" height="12"><path d="M1 6.5h10" stroke="#111"/></svg></span>
+        <span><svg width="12" height="12"><rect x="1.5" y="1.5" width="9" height="9" fill="none" stroke="#111"/></svg></span>
+        <span><svg width="12" height="12"><path d="M1.5 1.5l9 9M10.5 1.5l-9 9" stroke="#111"/></svg></span>
+      </div>
+    </div>
+    <div class="win-tabs"><span class="file">Archivo</span><span>Inicio</span><span>Compartir</span><span>Vista</span><span class="rt">⌄ &nbsp;?</span></div>
+    <div class="win-addr">
+      <div class="win-nav"><span>←</span><span>→</span><span>⌄</span><span>↑</span></div>
+      <div class="win-path"><svg class="ico sm"><use href="#i-folder"/></svg><span class="sep">›</span>Este equipo<span class="sep">›</span>Documentos<span class="sep">›</span>Colegio<span class="sep">›</span>Pruebas<span class="dd">⌄ ⟳</span></div>
+      <div class="win-search"><span>Buscar en Pruebas</span><svg class="ico sm"><use href="#i-search"/></svg></div>
+    </div>
+    <div class="win-body">
+      <div class="win-side">
+        <div><svg class="ico"><use href="#i-star"/></svg>Acceso rápido</div>
+        <div class="in"><svg class="ico"><use href="#i-desk"/></svg>Escritorio</div>
+        <div class="in"><svg class="ico"><use href="#i-down"/></svg>Descargas</div>
+        <div class="in"><svg class="ico"><use href="#i-docs"/></svg>Documentos</div>
+        <div class="in"><svg class="ico"><use href="#i-pics"/></svg>Imágenes</div>
+        <div class="in hi"><svg class="ico"><use href="#i-folder"/></svg>Pruebas</div>
+        <div class="gap"><svg class="ico"><use href="#i-cloud"/></svg>OneDrive</div>
+        <div><svg class="ico"><use href="#i-pc"/></svg>Este equipo</div>
+        <div><svg class="ico"><use href="#i-net"/></svg>Red</div>
+      </div>
+      <div class="win-main">
+        <div class="win-head"><span>Nombre</span><span>Fecha de modificación</span><span>Tipo</span><span>Tamaño</span></div>
+        <div class="win-rows" data-edit>
+          <div class="win-row" style="--i:0"><span><svg class="ico"><use href="#i-folder"/></svg>2023</span><span>14-12-2023 18:02</span><span>Carpeta de archivos</span><span></span></div>
+          <div class="win-row" style="--i:1"><span><svg class="ico"><use href="#i-folder"/></svg>2024</span><span>20-12-2024 17:45</span><span>Carpeta de archivos</span><span></span></div>
+          <div class="win-row" style="--i:2"><span><svg class="ico"><use href="#i-folder"/></svg>Guías</span><span>02-09-2026 21:13</span><span>Carpeta de archivos</span><span></span></div>
+          <div class="win-row" style="--i:3"><span><svg class="ico"><use href="#i-folder"/></svg>Pruebas antiguas (NO BORRAR)</span><span>11-03-2022 9:30</span><span>Carpeta de archivos</span><span></span></div>
+          <div class="win-row" style="--i:4"><span><svg class="ico"><use href="#i-folder"/></svg>Recuperativas</span><span>28-08-2026 22:47</span><span>Carpeta de archivos</span><span></span></div>
+          <div class="win-row" style="--i:5"><span><svg class="ico"><use href="#i-word"/></svg>Copia de Prueba química unidad 2</span><span>05-09-2026 23:10</span><span>Documento de Microsoft Word</span><span>61 KB</span></div>
+          <div class="win-row" style="--i:6"><span><svg class="ico"><use href="#i-word"/></svg>Guía estequiometría</span><span>01-09-2026 22:05</span><span>Documento de Microsoft Word</span><span>38 KB</span></div>
+          <div class="win-row" style="--i:7"><span><svg class="ico"><use href="#i-word"/></svg>Pauta prueba unidad 2</span><span>06-09-2026 0:12</span><span>Documento de Microsoft Word</span><span>27 KB</span></div>
+          <div class="win-row" style="--i:8"><span><svg class="ico"><use href="#i-word"/></svg>Prueba 4°B recuperativa</span><span>28-08-2026 22:40</span><span>Documento de Microsoft Word</span><span>44 KB</span></div>
+          <div class="win-row" style="--i:9"><span><svg class="ico"><use href="#i-word"/></svg>Prueba pH y soluciones coef 2</span><span>22-07-2026 19:20</span><span>Documento de Microsoft Word</span><span>49 KB</span></div>
+          <div class="win-row" style="--i:10"><span><svg class="ico"><use href="#i-word"/></svg>Prueba química 2025 (la buena)</span><span>16-06-2025 20:31</span><span>Documento de Microsoft Word</span><span>58 KB</span></div>
+          <div class="win-row sel" style="--i:11"><span><svg class="ico"><use href="#i-word"/></svg>Prueba química unidad 2 FINAL (2)</span><span>06-09-2026 0:48</span><span>Documento de Microsoft Word</span><span>62 KB</span></div>
+          <div class="win-row" style="--i:12"><span><svg class="ico"><use href="#i-word"/></svg>Prueba química unidad 2 FINAL</span><span>05-09-2026 23:52</span><span>Documento de Microsoft Word</span><span>62 KB</span></div>
+          <div class="win-row" style="--i:13"><span><svg class="ico"><use href="#i-word"/></svg>Prueba química unidad 2</span><span>04-09-2026 21:37</span><span>Documento de Microsoft Word</span><span>57 KB</span></div>
+          <div class="win-row" style="--i:14"><span><svg class="ico"><use href="#i-word"/></svg>prueba_quimica_u2_corregida_v3</span><span>05-09-2026 22:58</span><span>Documento de Microsoft Word</span><span>60 KB</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="win-status"><span>15 elementos</span><span>1 elemento seleccionado &nbsp; 62 KB</span></div>
+  </div>
+</section>
+
+<!-- 4 · La solución -->
+<section class="slide s-sol">
+  <div class="sol">
+    <div>
+      <div class="kicker rise" data-edit>La solución</div>
+      <img class="sol-logo rise" style="--d:.1s" data-img="timy-logo.png" alt="Timy">
+      <p class="sol-lede rise" style="--d:.2s" data-edit>Un escáner en el colegio. La IA hace el resto.</p>
+    </div>
+    <img class="sol-photo rise" style="--d:.25s" data-img="timy-escaneres.webp" alt="Escáneres conectados al punto Timy">
+  </div>
+</section>
+
+<!-- 5 · Una prueba (barrido) -->
+<section class="slide s-scan" data-anim="scan">
+  <div class="sc">
+    <div>
+      <div class="kicker rise" data-edit>Una prueba</div>
+      <h2 class="ttl rise" style="--d:.08s" data-edit>De papel a datos.</h2>
+      <p class="sub rise" style="--d:.16s" data-edit>Timy lee la letra, corrige con rúbrica y clasifica cada pregunta.</p>
+      <button class="fx-replay rise" style="--d:.24s" type="button" data-act="scan">Repetir el escaneo</button>
+    </div>
+    <div class="fx-scan rise" style="--d:.1s">
+      <div class="fx-scan__sheet">
+        <img data-img="prueba-mate-4m-sin-correccion.jpg" alt="Prueba de matemática de 4° Medio respondida a mano">
+        <div class="fx-scan__data">
+          <div class="fx-scan__head">
+            <div class="t" data-edit>Matemática · 4° Medio<br>Estudiante · corregida por Timy</div>
+            <div class="n" data-edit>7,0</div>
+          </div>
+          <div class="fx-row"><div class="q" data-edit>Ecuación cuadrática por factorización<span>MA4M OA-02 · Aplicar</span></div><div class="fx-chip fx-chip--ok" data-edit>4/4 logrado</div></div>
+          <div class="fx-row"><div class="q" data-edit>Ecuación exponencial<span>MA4M OA-04 · Aplicar</span></div><div class="fx-chip fx-chip--ok" data-edit>4/4 logrado</div></div>
+          <div class="fx-row"><div class="q" data-edit>Razones trigonométricas<span>MA4M OA-06 · Recordar</span></div><div class="fx-chip fx-chip--ok" data-edit>4/4 logrado</div></div>
+          <div class="fx-row"><div class="q" data-edit>Probabilidad sin reposición<span>MA4M OA-08 · Analizar</span></div><div class="fx-chip fx-chip--ok" data-edit>4/4 logrado</div></div>
+          <div class="fx-evid" data-edit><b>Evidencia del manuscrito</b>“En la pregunta 3 hay intentos tachados al margen. Timy los descarta y lee solo la respuesta final: 0,6.”</div>
+        </div>
+        <div class="fx-scan__beam"></div>
+      </div>
+      <div class="fx-scan__badge"><span class="dot"></span><span class="lbl" data-dyn></span><span class="val" data-dyn></span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 6 · Un curso completo (pila) -->
+<section class="slide s-pile" data-anim="pile">
+  <div class="fx-pile-wrap rise">
+    <div class="fx-pile-grid">
+      <div class="fx-pile-copy">
+        <div class="kicker" data-edit>Un curso completo</div>
+        <h3 data-edit>32 hojas entran. Tres cifras salen.</h3>
+        <p data-edit>Cada pregunta corregida alimenta el perfil del estudiante, el mapa del curso y el del colegio. Nadie llena una planilla.</p>
+      </div>
+      <div class="fx-stage">
+        <div class="fx-pile" data-dyn></div>
+        <div class="fx-counter" data-dyn></div>
+        <div class="fx-feed" data-dyn></div>
+        <div class="fx-final">
+          <div class="k"><div class="v" data-edit>5,4</div><div class="l" data-edit>Promedio del curso</div></div>
+          <div class="k"><div class="v" data-edit>#7 <em>OA-08 · analizar</em></div><div class="l" data-edit>Ítem con más errores · 21 de 32</div></div>
+          <div class="k"><div class="v" data-edit>3 h 20 <em>min</em></div><div class="l" data-edit>Tiempo devuelto al profesor</div></div>
+        </div>
+        <button class="fx-replay fx-pile-replay" type="button" data-act="pile">Repetir</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 7 · Ejemplos (demo) -->
+<section class="slide s-demo" data-anim="demo">
+  <div class="kicker rise" data-edit>Ejemplos · química, matemática y lenguaje</div>
+  <div class="fx-demo rise" style="--d:.1s">
+    <div class="fx-demo__bar"><i></i><i></i><i></i><span class="path">timy.app / corrección / 4° Medio</span></div>
+    <div class="fx-demo__body">
+      <div class="fx-demo__left">
+        <div class="fx-lbl">Elige una prueba</div>
+        <div class="fx-samples" data-dyn></div>
+      </div>
+      <div class="fx-demo__right">
+        <div class="fx-idle">Elige una prueba para ver la nota, el desglose y la evidencia del manuscrito.</div>
+        <div class="fx-proc" hidden><div class="st" data-dyn></div><div class="fx-pbar"><i></i></div></div>
+        <div class="fx-res">
+          <div class="fx-res__head"><div class="fx-who" data-dyn></div><div class="fx-grade" data-dyn></div></div>
+          <div class="fx-rows" data-dyn></div>
+          <div class="fx-evid" data-dyn></div>
+          <div class="fx-kpis" data-dyn></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 8 · Paso a paso del profesor -->
+<section class="slide s-steps">
+  <div class="kicker rise" data-edit>Paso a paso del profesor</div>
+  <h2 class="ttl rise" style="--d:.08s" data-edit>Con la prueba que ya tiene.</h2>
+  <div class="tl">
+    <div class="tlg">
+      <div class="mi frag">
+        <div class="ic"><svg viewBox="0 0 48 48" fill="none" stroke="#1A55DB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 40V12a2 2 0 0 1 2-2h13l9 9v21a2 2 0 0 1-2 2H14a2 2 0 0 1-2-2Z"/><path d="M27 10v9h9"/><path d="M24 34V23"/><path d="M20 27l4-4 4 4"/></svg></div>
+        <span class="st">01</span>
+        <h3 data-edit>El profesor sube su prueba</h3>
+        <p data-edit>El PDF de la prueba que ya usa. No hay que rehacer ni digitar nada.</p>
+      </div>
+      <div class="mi frag">
+        <div class="ic"><svg viewBox="0 0 48 48" fill="none" stroke="#1A55DB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="24" cy="13" rx="13" ry="5"/><path d="M11 13v10c0 2.8 5.8 5 13 5s13-2.2 13-5V13"/><path d="M11 23v10c0 2.8 5.8 5 13 5s13-2.2 13-5V23"/></svg></div>
+        <span class="st">02</span>
+        <h3 data-edit>El modelo categoriza cada pregunta</h3>
+        <p data-edit>La guarda en la base de preguntas de la institución.</p>
+        <div class="chips" data-edit><span>Objetivo</span><span>Eje temático</span><span>Habilidad</span><span>Dificultad</span><span>Rúbrica</span></div>
+      </div>
+      <div class="mi frag">
+        <div class="ic"><svg viewBox="0 0 48 48" fill="none" stroke="#1A55DB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="22" width="32" height="14" rx="2"/><path d="M15 22V9a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v13"/><path d="M19 13h10"/><path d="M19 17h7"/><path d="M13 29h22"/></svg></div>
+        <span class="st">03</span>
+        <h3 data-edit>Timy corrige y compara</h3>
+        <p data-edit>Identifica al estudiante y su curso, corrige y marca fortalezas y debilidades.</p>
+        <div class="chips" data-edit><span>Feedback por estudiante</span><span>Curso</span><span>Otros cursos</span><span>Otras instituciones</span></div>
+      </div>
+      <div class="mi frag">
+        <div class="ic"><svg viewBox="0 0 48 48" fill="none" stroke="#1A55DB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 37c0-6 5-8 10-8s9-2 9-7"/><circle cx="11" cy="37" r="4"/><circle cx="30" cy="19" r="4"/><path d="M34 12l4-4-4-4"/><path d="M38 8h-6"/></svg></div>
+        <span class="st">04</span>
+        <h3 data-edit>Ruta de aprendizaje adaptativa</h3>
+        <p data-edit>Con esas fortalezas y debilidades arma una ruta distinta para cada estudiante.</p>
+      </div>
+    </div>
+  </div>
+  <div class="tl-note frag"><b data-edit>00 · Pasa solo</b><span data-edit>Si no subió la prueba antes, escanea directo: Timy detecta las preguntas nuevas, las clasifica y recién después corrige.</span></div>
+</section>
+
+<!-- 9 · Desglose -->
+<section class="slide s-dg">
+  <div class="kicker rise" data-edit>Desglose</div>
+  <h2 class="ttl rise" style="--d:.08s" data-edit>Cada nota, con su desglose.</h2>
+  <div class="dg">
+    <div class="frame rise" style="--d:.12s">
+      <span class="cap" data-edit>Lengua y Literatura · 4° Medio</span>
+      <img data-img="prueba-lengua-4m.jpg" alt="Prueba de lengua y literatura con respuestas escritas a mano">
+    </div>
+    <div class="rise" style="--d:.2s">
+      <div class="mlab" data-edit>La misma prueba, antes y después</div>
+      <div class="tf">
+        <div class="old"><b data-edit>5,6</b><span>antes</span></div>
+        <div class="ar">→</div>
+        <div>
+          <div class="bar-r"><div class="bt" data-edit><span>Interpretar · visión de mundo</span><b>85%</b></div><div class="track"><div class="fill" style="--w:85%"></div></div></div>
+          <div class="bar-r"><div class="bt" data-edit><span>Analizar · conflicto interno</span><b>80%</b></div><div class="track"><div class="fill" style="--w:80%"></div></div></div>
+          <div class="bar-r"><div class="bt" data-edit><span>Analizar · figura literaria</span><b>60%</b></div><div class="track"><div class="fill warn" style="--w:60%"></div></div></div>
+          <div class="bar-r"><div class="bt" data-edit><span>Evaluar · relación con el presente</span><b>40%</b></div><div class="track"><div class="fill alert" style="--w:40%"></div></div></div>
+        </div>
+      </div>
+      <div class="dcard">
+        <div class="dhead"><span class="tt" data-edit>Perfil por dificultad</span><span class="tg" data-edit>16 preguntas</span></div>
+        <div class="cmp">
+          <span class="lb">Baja</span><div class="tk"><div class="fl a" style="--w:91%">91%</div></div>
+          <span class="lb">Media</span><div class="tk"><div class="fl a" style="--w:72%">72%</div></div>
+          <span class="lb">Alta</span><div class="tk"><div class="fl c" style="--w:38%">38%</div></div>
+        </div>
+        <div class="legend"><span><i style="background:var(--blue)"></i>logro del estudiante</span><span><i style="background:var(--ice-3)"></i>bajo el umbral</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 10 · Dashboard para cada nivel -->
+<section class="slide s-dash">
+  <div class="kicker rise" data-edit>Dashboard</div>
+  <h2 class="ttl rise" style="--d:.08s" data-edit>Un dashboard para cada nivel.</h2>
+  <div class="dash4">
+    <div class="dp frag">
+      <span class="lv">Nivel 01</span>
+      <h3 data-edit>Estudiante</h3>
+      <div class="bar-r"><div class="bt" data-edit><span>Recordar</span><b>88%</b></div><div class="track"><div class="fill" style="--w:88%"></div></div></div>
+      <div class="bar-r"><div class="bt" data-edit><span>Aplicar</span><b>81%</b></div><div class="track"><div class="fill" style="--w:81%"></div></div></div>
+      <div class="bar-r"><div class="bt" data-edit><span>Analizar</span><b>54%</b></div><div class="track"><div class="fill warn" style="--w:54%"></div></div></div>
+      <div class="bar-r"><div class="bt" data-edit><span>Evaluar</span><b>38%</b></div><div class="track"><div class="fill alert" style="--w:38%"></div></div></div>
+      <div class="kpi2">
+        <div><b data-edit>5,7</b><span data-edit>Promedio del periodo</span></div>
+        <div><b data-edit>3</b><span data-edit>Objetivos con brecha</span></div>
+      </div>
+    </div>
+    <div class="dp frag">
+      <span class="lv">Nivel 02</span>
+      <h3 data-edit>Curso</h3>
+      <div class="hm" style="grid-template-columns:96px repeat(6,1fr)">
+        <span class="hh"></span><span class="hh">E1</span><span class="hh">E2</span><span class="hh">E3</span><span class="hh">E4</span><span class="hh">E5</span><span class="hh">E6</span>
+        <span class="rl">OA-02 Aplicar</span><span class="cell c6">92</span><span class="cell c6">88</span><span class="cell c5">78</span><span class="cell c6">90</span><span class="cell c5">74</span><span class="cell c6">86</span>
+        <span class="rl">OA-04 Aplicar</span><span class="cell c5">80</span><span class="cell c6">85</span><span class="cell c5">72</span><span class="cell c4">64</span><span class="cell c5">76</span><span class="cell c5">79</span>
+        <span class="rl">OA-06 Recordar</span><span class="cell c6">88</span><span class="cell c5">75</span><span class="cell c4">62</span><span class="cell c5">71</span><span class="cell c6">84</span><span class="cell c4">66</span>
+        <span class="rl">OA-08 Analizar</span><span class="cell c3">48</span><span class="cell c2">41</span><span class="cell c3">52</span><span class="cell c1">28</span><span class="cell c2">38</span><span class="cell c3">50</span>
+        <span class="rl">OA-11 Evaluar</span><span class="cell c2">36</span><span class="cell c1">24</span><span class="cell c2">40</span><span class="cell c1">22</span><span class="cell c1">30</span><span class="cell c2">42</span>
+      </div>
+      <div class="note warn" data-edit>Las dos filas rojas son del curso completo, no de un estudiante.</div>
+    </div>
+    <div class="dp frag">
+      <span class="lv">Nivel 03</span>
+      <h3 data-edit>Colegio</h3>
+      <div class="bar-r"><div class="bt" data-edit><span>Recordar</span><b>41%</b></div><div class="track"><div class="fill" style="--w:41%"></div></div></div>
+      <div class="bar-r"><div class="bt" data-edit><span>Aplicar</span><b>38%</b></div><div class="track"><div class="fill" style="--w:38%"></div></div></div>
+      <div class="bar-r"><div class="bt" data-edit><span>Analizar</span><b>15%</b></div><div class="track"><div class="fill warn" style="--w:15%"></div></div></div>
+      <div class="bar-r"><div class="bt" data-edit><span>Evaluar y crear</span><b>6%</b></div><div class="track"><div class="fill alert" style="--w:6%"></div></div></div>
+      <div class="note warn" data-edit>El 79% de lo que evalúa este colegio pide recordar o aplicar. La prueba nacional pide analizar.</div>
+    </div>
+    <div class="dp frag">
+      <span class="lv">Nivel 04</span>
+      <h3 data-edit>Red o universidad</h3>
+      <div class="hm" style="grid-template-columns:104px repeat(6,1fr)">
+        <span class="hh"></span><span class="hh">S1</span><span class="hh">S2</span><span class="hh">S3</span><span class="hh">S4</span><span class="hh">S5</span><span class="hh">S6</span>
+        <span class="rl">Lectura crítica</span><span class="cell c6">84</span><span class="cell c5">76</span><span class="cell c4">65</span><span class="cell c6">88</span><span class="cell c3">52</span><span class="cell c5">74</span>
+        <span class="rl">Álgebra</span><span class="cell c5">78</span><span class="cell c6">86</span><span class="cell c5">72</span><span class="cell c4">66</span><span class="cell c2">44</span><span class="cell c5">70</span>
+        <span class="rl">Argumentación</span><span class="cell c3">50</span><span class="cell c2">42</span><span class="cell c1">31</span><span class="cell c3">48</span><span class="cell c1">26</span><span class="cell c2">38</span>
+        <span class="rl">Problemas</span><span class="cell c4">62</span><span class="cell c5">71</span><span class="cell c3">54</span><span class="cell c4">60</span><span class="cell c2">40</span><span class="cell c4">58</span>
+      </div>
+      <div class="kpi2">
+        <div><b data-edit>6</b><span data-edit>Sedes en la misma base</span></div>
+        <div><b data-edit>28.400</b><span data-edit>Preguntas clasificadas</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 11 · Cierre -->
+<section class="slide s-end">
+  <div class="end">
+    <img class="rise" data-img="timy-logo.png" alt="Timy">
+    <p class="rise" style="--d:.15s" data-edit>Corrección con IA para colegios y universidades.</p>
+  </div>
+</section>
+
+</div>
+</div>
+</div>
+
+<template id="hud-tpl"><div class="prog"></div>
+<div class="hud">
+  <button type="button" class="hb-prev" aria-label="Anterior"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3L5 8l5 5"/></svg></button>
+  <span class="ctr">01 / 11</span>
+  <button type="button" class="hb-next" aria-label="Siguiente"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3l5 5-5 5"/></svg></button>
+  <button type="button" class="hb-fs" aria-label="Pantalla completa"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6V2h4M14 6V2h-4M2 10v4h4M14 10v4h-4"/></svg></button>
+</div>
+<div class="toast" role="status"></div></template>
+
+<template id="editor-tpl"><div class="ebar">
+  <span class="t">✏️ Modo edición</span>
+  <button type="button" data-ed="add">+ Lámina nueva</button>
+  <button type="button" data-ed="dup">⧉ Duplicar esta</button>
+  <button type="button" data-ed="del">🗑 Borrar esta</button>
+  <button type="button" data-ed="exp">⬇ Exportar copia limpia</button>
+  <button type="button" class="danger" data-ed="reset">↺ Descartar cambios</button>
+  <button type="button" class="go" data-ed="done">✓ Listo</button>
+</div>
+<button type="button" class="efab">✏️ Editar</button></template>
+
+<script id="boot-js">
+(function(){
+  var map = null;
+  try{ var j = document.getElementById('imgs'); if(j) map = JSON.parse(j.textContent); }catch(e){}
+  window.IMGS_EMBEDDED = !!map;
+  window.IMG = function(f){ return (map && map[f]) || ('img/' + f); };
+  window.hydrateImgs = function(root){
+    Array.prototype.forEach.call((root || document).querySelectorAll('img[data-img]'), function(im){
+      var v = window.IMG(im.getAttribute('data-img'));
+      if(im.getAttribute('src') !== v) im.setAttribute('src', v);
+    });
+  };
+  window.hydrateImgs(document);
+  var t = document.getElementById('hud-tpl');
+  if(t && !document.querySelector('.hud')) document.body.appendChild(t.content.cloneNode(true));
+})();
+</script>
+
+<script id="editor-js">
+(function(){
+'use strict';
+/* Editor de textos. Dentro de Claude (Artifact) guarda una versión nueva para todos;
+   fuera de Claude (archivo local) guarda en este navegador. */
+var KEY = 'timy-presentacion', VER = '2026-09-24-3';
+var deck = document.getElementById('deck'), body = document.body;
+var FRAMED = !!(window.claude && typeof window.claude.use === 'function');
+var ART = null, DL = null, busy = false;
+var HEAD = '<meta charset="utf-8">\n<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">\n<meta name="robots" content="noindex">\n<title>Timy paso a paso</title>\n<link rel="preconnect" href="https://fonts.googleapis.com">\n<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">';
+
+function each(list, fn){ Array.prototype.forEach.call(list, fn); }
+function clean(root){
+  each(root.querySelectorAll('[contenteditable]'), function(e){ e.removeAttribute('contenteditable'); });
+  each(root.querySelectorAll('.is-active,.play,.is-shown,.is-on,.is-in'), function(e){ e.classList.remove('is-active','play','is-shown','is-on','is-in'); });
+  each(root.querySelectorAll('[data-dyn]'), function(e){ e.innerHTML = ''; });
+  each(root.querySelectorAll('.fx-scan__data,.fx-scan__beam,.fx-pbar i'), function(e){ e.removeAttribute('style'); });
+  each(root.querySelectorAll('.fx-proc'), function(e){ e.setAttribute('hidden', ''); });
+  each(root.querySelectorAll('.fx-idle'), function(e){ e.removeAttribute('hidden'); });
+  each(root.querySelectorAll('img[data-img]'), function(e){ e.removeAttribute('src'); });
+}
+if(!FRAMED){
+  try{
+    var raw = localStorage.getItem(KEY);
+    if(raw){ var o = JSON.parse(raw); if(o && o.v === VER && o.html){ deck.innerHTML = o.html; clean(deck); if(window.hydrateImgs) window.hydrateImgs(deck); } }
+  }catch(e){}
+}
+
+/* La página completa se arma desde sus partes fijas + las láminas (limpias). */
+function buildDoc(withEditor){
+  var c = deck.cloneNode(true); clean(c);
+  function txt(id){ var e = document.getElementById(id); return e ? e.textContent : ''; }
+  function outer(id){ var e = document.getElementById(id); return e ? e.outerHTML : ''; }
+  var SC = '<' + '/script>';
+  return '<!doctype html>\n<html lang="es">\n<head>\n' + HEAD + '\n<style id="css">' + txt('css') + '</style>\n</head>\n<body>\n' +
+    outer('sprite') + '\n<div class="viewport">\n<div class="stage">\n<div class="deck" id="deck">\n' + c.innerHTML.trim() + '\n</div>\n</div>\n</div>\n\n' +
+    outer('imgs') + '\n' + outer('hud-tpl') + '\n' + (withEditor ? outer('editor-tpl') + '\n' : '') +
+    '<script id="boot-js">' + txt('boot-js') + SC + '\n' +
+    (withEditor ? '<script id="editor-js">' + txt('editor-js') + SC + '\n' : '') +
+    '<script id="app-js">' + txt('app-js') + SC + '\n</body>\n</html>\n';
+}
+
+var saveT;
+function saveLocal(){
+  if(FRAMED) return;
+  clearTimeout(saveT);
+  saveT = setTimeout(function(){
+    try{ var c = deck.cloneNode(true); clean(c); localStorage.setItem(KEY, JSON.stringify({v:VER, html:c.innerHTML})); }catch(e){}
+  }, 250);
+}
+function editing(){ return body.classList.contains('editing'); }
+function setEditable(on){ each(deck.querySelectorAll('[data-edit]'), function(el){ el.contentEditable = on ? 'true' : 'false'; }); }
+function enter(){
+  body.classList.add('editing'); body.classList.remove('idle'); setEditable(true);
+  toast(ART ? 'Escribe directo sobre el texto. Al apretar Listo se guarda para todos.' : 'Escribe directo sobre el texto. Se guarda en este navegador.');
+}
+function leave(){
+  body.classList.remove('editing'); setEditable(false);
+  if(document.activeElement && document.activeElement.blur) document.activeElement.blur();
+}
+function done(){
+  if(!editing() || busy) return;
+  if(ART){ publishNow(); return; }
+  leave(); saveLocal(); toast('Cambios guardados en este navegador');
+}
+deck.addEventListener('input', function(){ if(editing()) saveLocal(); });
+
+function curSlide(){ return window.App ? App.slides()[App.cur] : null; }
+function addSlide(){
+  var s = curSlide(); if(!s) return;
+  var n = document.createElement('section');
+  n.className = 'slide s-free';
+  n.innerHTML = '<div class="kicker" data-edit>Nueva sección</div><h2 class="ttl" data-edit>Título de la lámina</h2><p class="sub" data-edit>Escribe aquí el contenido.</p>';
+  s.after(n);
+  if(editing()) setEditable(true);
+  saveLocal(); App.refresh(App.cur + 1); toast('Lámina agregada');
+}
+function dupSlide(){
+  var s = curSlide(); if(!s) return;
+  var c = s.cloneNode(true); clean(c); s.after(c); if(window.hydrateImgs) window.hydrateImgs(c);
+  if(editing()) setEditable(true);
+  saveLocal(); App.refresh(App.cur + 1); toast('Lámina duplicada');
+}
+function delSlide(){
+  if(App.slides().length <= 1){ toast('No se puede borrar la única lámina'); return; }
+  var i = App.cur; curSlide().remove();
+  saveLocal(); App.refresh(Math.max(0, i - 1)); toast('Lámina borrada');
+}
+function resetDeck(){
+  if(!FRAMED){ try{ localStorage.removeItem(KEY); }catch(e){} }
+  try{ sessionStorage.setItem('timy-slide', String(App.cur)); }catch(e){}
+  location.reload();
+}
+function exportHTML(){
+  var html = buildDoc(false);
+  if(DL){
+    DL.save({filename:'timy-paso-a-paso.html', data:html}).then(function(){ toast('Copia descargada'); }, function(err){ if(err && err.code !== 'cancelled') toast('No se pudo descargar la copia'); });
+    return;
+  }
+  if(FRAMED){ toast('La descarga no está disponible en esta vista'); return; }
+  var a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([html], {type:'text/html'}));
+  a.download = 'timy-paso-a-paso.html';
+  document.body.appendChild(a); a.click(); a.remove();
+  toast(window.IMGS_EMBEDDED ? 'Copia descargada' : 'Copia descargada. Guárdala junto a la carpeta img.');
+}
+
+/* Guardar para todos (Artifact) */
+function setBusy(on){ busy = on; each(document.querySelectorAll('.ebar button'), function(b){ b.disabled = on; }); }
+function attempt(html, retried){
+  return ART.publish({'index.html': {content:html, contentType:'text/html'}}).catch(function(err){
+    var c = err && err.code;
+    if(c === 'capability_disabled' || c === 'capability_removed' || c === 'invalid_content' || c === 'transform_error' || c === 'read_only_path') return ART.publish(html);
+    if(c === 'upstream_error' && !retried) return new Promise(function(r){ setTimeout(r, 900 + Math.random() * 900); }).then(function(){ return attempt(html, true); });
+    throw err;
+  });
+}
+function publishNow(){
+  var html = buildDoc(true);
+  setBusy(true); toast('Guardando…', true);
+  try{ sessionStorage.setItem('timy-slide', String(App.cur)); }catch(e){}
+  attempt(html, false).then(function(){
+    setBusy(false); leave(); toast('Guardado. Todos ven esta versión.');
+  }, function(err){
+    setBusy(false);
+    var c = err && err.code;
+    if(c === 'conflict'){ toast('Había una versión más nueva guardada. Se abre esa.'); return; }
+    if(c === 'not_writer' || c === 'not_granted' || c === 'consent_required' || c === 'not_declared'){ leave(); readOnly(); toast('Esta vista es solo de lectura: los cambios no se guardan.'); return; }
+    if(c === 'rate_limited'){ toast('Guardaste varias veces seguidas. Espera unos segundos y aprieta Listo.'); return; }
+    if(c === 'too_large'){ toast('La presentación quedó muy pesada para guardarla.'); return; }
+    toast('No se pudo guardar. Revisa la conexión y aprieta Listo de nuevo.');
+  });
+}
+function readOnly(){ each(document.querySelectorAll('.efab,.ebar'), function(e){ e.remove(); }); }
+
+/* Confirmación dentro de la página (el visor no muestra confirm()) */
+function twice(btn, fn){
+  if(btn.classList.contains('armed')){ clearTimeout(btn._t); btn.classList.remove('armed'); btn.textContent = btn._l; fn(); return; }
+  btn._l = btn.textContent; btn.classList.add('armed'); btn.textContent = '¿Seguro? Toca otra vez';
+  btn._t = setTimeout(function(){ btn.classList.remove('armed'); btn.textContent = btn._l; }, 3500);
+}
+
+var toastT;
+function toast(m, sticky){
+  var t = document.querySelector('.toast'); if(!t) return;
+  t.textContent = m; t.classList.add('show');
+  clearTimeout(toastT); if(!sticky) toastT = setTimeout(function(){ t.classList.remove('show'); }, 3000);
+}
+
+function mount(){
+  if(document.querySelector('.efab')) return;
+  var t = document.getElementById('editor-tpl'); if(!t) return;
+  document.body.appendChild(t.content.cloneNode(true));
+  var lbl = document.querySelector('.ebar .t');
+  if(lbl) lbl.textContent = ART ? '✏️ Modo edición · al apretar Listo se guarda para todos' : '✏️ Modo edición · se guarda en este navegador';
+  document.querySelector('.efab').addEventListener('click', enter);
+  var ACT = {add:addSlide, dup:dupSlide, exp:exportHTML, done:done};
+  each(document.querySelectorAll('.ebar [data-ed]'), function(b){
+    b.addEventListener('click', function(){
+      var k = b.getAttribute('data-ed');
+      if(k === 'del') twice(b, delSlide);
+      else if(k === 'reset') twice(b, resetDeck);
+      else ACT[k]();
+    });
+  });
+}
+
+window.Editor = {done:done, build:buildDoc};
+if(!FRAMED){ mount(); }
+else {
+  window.claude.use('downloads').then(function(d){ DL = d; }, function(){});
+  window.claude.use('artifact').then(function(a){
+    if(!a) return;
+    ART = a;
+    return window.claude.use('user').then(function(u){
+      if(!u) return false;
+      return Promise.all([u.canEdit(), u.isOwner()]).then(function(r){ return r[0] === true || r[1] === true; });
+    }).catch(function(){ return false; }).then(function(ok){ if(ok) mount(); });
+  }, function(){});
+}
+})();
+</script>
+
+<script id="app-js">
+(function(){
+'use strict';
+var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+var root = document.documentElement, body = document.body;
+var deck = document.getElementById('deck');
+var cur = 0, mode = '';
+
+function slides(){ return Array.prototype.filter.call(deck.children, function(e){ return e.classList.contains('slide'); }); }
+function isFlow(){ return root.classList.contains('flow'); }
+function editing(){ return body.classList.contains('editing'); }
+function each(list, fn){ Array.prototype.forEach.call(list, fn); }
+
+/* ---------- escala ---------- */
+function layout(){
+  var w = window.innerWidth, h = window.innerHeight;
+  var flow = w < 760 || (h > w && w < 1100);
+  root.classList.toggle('flow', flow);
+  root.classList.toggle('fit', !flow);
+  root.style.setProperty('--s', flow ? 1 : Math.min(w / 1600, h / 900));
+  var m = flow ? 'flow' : 'fit';
+  if(mode && m !== mode && slides().length){ mode = m; refresh(cur); return; }
+  mode = m;
+}
+
+/* ---------- temporizadores por lámina ---------- */
+function later(s, fn, ms){ (s._t = s._t || []).push(setTimeout(fn, ms)); }
+function stop(s){ (s._t || []).forEach(clearTimeout); s._t = []; if(s._raf){ cancelAnimationFrame(s._raf); s._raf = 0; } }
+
+var A = {};
+
+/* ---------- barrido ---------- */
+A.scan = {
+  el: function(s){ return { data:s.querySelector('.fx-scan__data'), beam:s.querySelector('.fx-scan__beam'), lbl:s.querySelector('.fx-scan__badge .lbl'), val:s.querySelector('.fx-scan__badge .val'), n:s.querySelector('.fx-scan__head .n') }; },
+  reset: function(s){
+    stop(s); var e = this.el(s); if(!e.data) return;
+    e.data.style.clipPath = 'inset(0 0 100% 0)'; e.beam.style.opacity = 0; e.beam.style.top = '0%';
+    e.lbl.textContent = 'Leyendo manuscrito'; e.val.textContent = '0%';
+  },
+  done: function(s){
+    var e = this.el(s);
+    e.data.style.clipPath = 'inset(0 0 0 0)'; e.beam.style.opacity = 0;
+    e.lbl.textContent = 'Nota y rúbrica listas'; e.val.textContent = e.n ? e.n.textContent.trim() : '';
+  },
+  run: function(s){
+    var self = this; this.reset(s); var e = this.el(s); if(!e.data) return;
+    if(reduce){ this.done(s); return; }
+    var D = 3200, t0 = 0;
+    e.beam.style.opacity = 1;
+    function step(t){
+      if(!t0) t0 = t;
+      var p = Math.min(1, (t - t0) / D);
+      var k = p < .5 ? 2*p*p : 1 - Math.pow(-2*p + 2, 2) / 2;
+      e.data.style.clipPath = 'inset(0 0 ' + ((1 - k) * 100) + '% 0)';
+      e.beam.style.top = (k * 100) + '%';
+      e.val.textContent = Math.round(k * 100) + '%';
+      if(p < 1){ s._raf = requestAnimationFrame(step); } else { s._raf = 0; self.done(s); }
+    }
+    s._raf = requestAnimationFrame(step);
+  },
+  enter: function(s){ var self = this; this.reset(s); later(s, function(){ self.run(s); }, 1100); },
+  leave: function(s){ this.reset(s); }
+};
+
+/* ---------- pila ---------- */
+A.pile = {
+  FILES: ['prueba-mate-4m-sin-correccion.jpg','prueba-lengua-4m.jpg','prueba-quimica-4m.jpg','prueba-historia-4m.jpg','prueba-biologia-4m.jpg','prueba-mate-2m.jpg'],
+  NUMS: ['04','09','12','17','21','26','30'],
+  TAGS: ['OA-02 · aplicar','OA-04 · aplicar','OA-06 · recordar','OA-08 · analizar'],
+  GR: [['6,4','ok'],['5,1',''],['4,3','bad'],['5,9','ok'],['4,8',''],['6,8','ok'],['3,9','bad']],
+  el: function(s){ return { pile:s.querySelector('.fx-pile'), feed:s.querySelector('.fx-feed'), fin:s.querySelector('.fx-final'), cnt:s.querySelector('.fx-counter') }; },
+  txt: function(n){ return '<b>' + n + '</b> de 32 hojas procesadas'; },
+  build: function(s){
+    var e = this.el(s); if(!e.pile) return;
+    e.pile.innerHTML = ''; e.feed.innerHTML = ''; e.fin.classList.remove('is-in'); e.cnt.innerHTML = this.txt(0);
+    var N = isFlow() ? 14 : 26;
+    for(var i = 0; i < N; i++){
+      var d = document.createElement('div');
+      d.className = 'fx-pg'; d.style.zIndex = i;
+      d.style.transform = 'translate(' + (Math.random()*7 - 3.5).toFixed(1) + 'px,' + (i * -1.1).toFixed(1) + 'px) rotate(' + (Math.random()*3 - 1.5).toFixed(2) + 'deg)';
+      d.innerHTML = '<img src="' + window.IMG(this.FILES[i % this.FILES.length]) + '" alt="">';
+      e.pile.appendChild(d);
+    }
+  },
+  reset: function(s){ stop(s); this.build(s); },
+  run: function(s){
+    var self = this, e = this.el(s); if(!e.pile) return;
+    stop(s); this.build(s);
+    if(reduce){ e.fin.classList.add('is-in'); e.cnt.innerHTML = this.txt(32); return; }
+    var sheets = Array.prototype.slice.call(e.pile.children).reverse(), N = sheets.length, gap = 150, dx = isFlow() ? 1 : 1.3;
+    sheets.forEach(function(sh, i){
+      later(s, function(){
+        sh.style.transform = 'translate(' + ((150 + Math.random()*26) * dx).toFixed(0) + 'px,' + ((-80 - Math.random()*36) * dx).toFixed(0) + 'px) rotate(' + (Math.random()*14 - 7).toFixed(1) + 'deg) scale(.72)';
+        sh.classList.add('is-gone');
+        e.cnt.innerHTML = self.txt(Math.min(32, Math.round((i + 1) * 32 / N)));
+        if(i < 6){
+          var g = self.GR[i % self.GR.length], r = document.createElement('div');
+          r.className = 'fx-fr';
+          r.innerHTML = '<span class="i">' + ('0' + (i + 1)).slice(-2) + '</span><span class="nm">Estudiante ' + self.NUMS[i % self.NUMS.length] + '<span>' + self.TAGS[i % self.TAGS.length] + '</span></span><span class="g ' + g[1] + '">' + g[0] + '</span>';
+          e.feed.appendChild(r);
+          void r.offsetWidth; r.classList.add('is-in');
+        }
+      }, 400 + i * gap);
+    });
+    var end = 400 + N * gap;
+    later(s, function(){ each(e.feed.children, function(r, i){ later(s, function(){ r.style.opacity = 0; r.style.transform = 'translateY(-10px)'; }, i * 60); }); }, end + 500);
+    later(s, function(){ e.fin.classList.add('is-in'); }, end + 1000);
+  },
+  enter: function(s){ var self = this; this.reset(s); later(s, function(){ self.run(s); }, 800); },
+  leave: function(s){ this.reset(s); }
+};
+
+/* ---------- ejemplos ---------- */
+A.demo = {
+  T: [
+    { id:'quimica', img:'prueba-quimica-4m.jpg', n:'Química · 4° Medio', s:'Cálculos y desarrollo escrito',
+      who:'Estudiante 22 · 4° Medio C', sub:'CN4M · rúbrica de 4 criterios', g:'6,5',
+      rows:[['Balance de ecuación química','CN4M OA-01 · Aplicar','4/4 logrado','ok'],
+            ['Concentración molar','CN4M OA-02 · Aplicar','4/4 logrado','ok'],
+            ['Cálculo de pH','CN4M OA-03 · Aplicar','4/4 logrado','ok'],
+            ['Oxidación y reducción','CN4M OA-04 · Comprender','3/4 en desarrollo','mid']],
+      ev:'“Explica bien la pérdida y la ganancia de electrones. Le falta nombrar al agente oxidante y al reductor.”',
+      k:[['3,9 s','Tiempo de proceso'],['2','Tachones descartados'],['97%','Confianza de lectura']] },
+    { id:'mate', img:'prueba-mate-4m-sin-correccion.jpg', n:'Matemática · 4° Medio', s:'4 preguntas de desarrollo',
+      who:'Estudiante 14 · 4° Medio A', sub:'MA4M · rúbrica de 4 criterios', g:'7,0',
+      rows:[['Ecuación cuadrática por factorización','MA4M OA-02 · Aplicar','4/4 logrado','ok'],
+            ['Ecuación exponencial','MA4M OA-04 · Aplicar','4/4 logrado','ok'],
+            ['Razones trigonométricas','MA4M OA-06 · Recordar','4/4 logrado','ok'],
+            ['Probabilidad sin reposición','MA4M OA-08 · Analizar','4/4 logrado','ok']],
+      ev:'“En la pregunta 3 hay intentos tachados al margen. Timy los descarta y lee solo la respuesta final: 0,6.”',
+      k:[['4,1 s','Tiempo de proceso'],['16','Puntos evaluados'],['0','Brechas abiertas']] },
+    { id:'lengua', img:'prueba-lengua-4m.jpg', n:'Lengua y Literatura · 4° Medio', s:'4 preguntas de desarrollo',
+      who:'Estudiante 07 · 4° Medio B', sub:'LE4M · rúbrica de 4 criterios', g:'5,6',
+      rows:[['Visión de mundo del texto','LE4M OA-03 · Interpretar','85% logrado','ok'],
+            ['Conflicto interno del personaje','LE4M OA-03 · Analizar','80% logrado','ok'],
+            ['Figura literaria y su efecto','LE4M OA-04 · Analizar','60% en desarrollo','mid'],
+            ['Relación con el presente','LE4M OA-06 · Evaluar','40% brecha','bad']],
+      ev:'“Identifica la figura, pero no explica su efecto en el lector. La conclusión repite la tesis sin evidencia nueva.”',
+      k:[['3,8 s','Tiempo de proceso'],['9 / 32','Con la misma brecha'],['Evaluar','Habilidad más débil']] }
+  ],
+  STEPS: ['Detectando la hoja y los marcos','Separando pregunta por pregunta','Leyendo el desarrollo manuscrito','Aplicando la rúbrica','Etiquetando objetivo, habilidad y dificultad'],
+  el: function(s){
+    var q = function(c){ return s.querySelector(c); };
+    return { wrap:q('.fx-samples'), idle:q('.fx-idle'), proc:q('.fx-proc'), st:q('.fx-proc .st'), fill:q('.fx-pbar i'), res:q('.fx-res'),
+             who:q('.fx-who'), grade:q('.fx-grade'), rows:q('.fx-rows'), evid:q('.fx-res .fx-evid'), kpis:q('.fx-kpis') };
+  },
+  paint: function(s, id){
+    var e = this.el(s);
+    e.wrap.innerHTML = this.T.map(function(t){
+      return '<button class="fx-samp" type="button" data-sample="' + t.id + '" aria-pressed="' + (id === t.id) + '"><img src="' + window.IMG(t.img) + '" alt=""><span class="n">' + t.n + '<span class="s">' + t.s + '</span></span></button>';
+    }).join('');
+  },
+  render: function(s, t){
+    var e = this.el(s);
+    e.who.innerHTML = t.who + '<span>' + t.sub + '</span>';
+    e.grade.innerHTML = t.g + '<span>Nota final</span>';
+    e.rows.innerHTML = t.rows.map(function(r){
+      return '<div class="fx-row"><div class="q">' + r[0] + '<span>' + r[1] + '</span></div><div class="fx-chip fx-chip--' + r[3] + '">' + r[2] + '</div></div>';
+    }).join('');
+    e.evid.innerHTML = '<b>Evidencia del manuscrito</b>' + t.ev; e.evid.classList.remove('is-in');
+    e.kpis.innerHTML = t.k.map(function(k){ return '<div class="fx-kpi"><div class="v">' + k[0] + '</div><div class="k">' + k[1] + '</div></div>'; }).join('');
+    e.res.classList.add('is-on');
+  },
+  play: function(s, id){
+    var self = this, e = this.el(s); if(!e.wrap) return;
+    var t = this.T.filter(function(x){ return x.id === id; })[0] || this.T[0];
+    stop(s);
+    each(e.wrap.querySelectorAll('.fx-samp'), function(b){ b.setAttribute('aria-pressed', String(b.getAttribute('data-sample') === t.id)); });
+    e.idle.hidden = true; e.res.classList.remove('is-on');
+    if(reduce){ this.render(s, t); each(e.rows.children, function(r){ r.classList.add('is-in'); }); e.evid.classList.add('is-in'); return; }
+    var D = 2400;
+    e.proc.hidden = false;
+    e.fill.style.transition = 'none'; e.fill.style.width = '0'; void e.fill.offsetWidth;
+    e.fill.style.transition = 'width ' + D + 'ms cubic-bezier(.4,0,.2,1)'; e.fill.style.width = '100%';
+    this.STEPS.forEach(function(st, i){ later(s, function(){ e.st.textContent = st; }, i * (D / self.STEPS.length)); });
+    later(s, function(){
+      e.proc.hidden = true; self.render(s, t);
+      each(e.rows.children, function(r, i){ later(s, function(){ r.classList.add('is-in'); }, 120 + i * 150); });
+      later(s, function(){ e.evid.classList.add('is-in'); }, 120 + t.rows.length * 150);
+    }, D + 150);
+  },
+  reset: function(s){
+    stop(s); var e = this.el(s); if(!e.wrap) return;
+    this.paint(s, null); e.idle.hidden = false; e.proc.hidden = true; e.res.classList.remove('is-on');
+  },
+  enter: function(s){ var self = this; this.reset(s); later(s, function(){ self.play(s, 'quimica'); }, 800); },
+  leave: function(s){ this.reset(s); }
+};
+
+function anim(s, phase){ var k = s.getAttribute('data-anim'); if(k && A[k] && A[k][phase]) A[k][phase](s); }
+
+/* ---------- navegación ---------- */
+function frags(s){ return Array.prototype.slice.call(s.querySelectorAll('.frag')); }
+function show(n, back){
+  var sl = slides(); if(!sl.length) return;
+  n = Math.max(0, Math.min(sl.length - 1, n));
+  var nx = sl[n];
+  sl.forEach(function(x){
+    if(x !== nx && x.classList.contains('is-active')){ x.classList.remove('is-active','play'); anim(x, 'leave'); }
+  });
+  frags(nx).forEach(function(f){ f.classList.toggle('is-shown', !!back); });
+  cur = n;
+  nx.classList.add('is-active');
+  nx.classList.remove('play'); void nx.offsetWidth; nx.classList.add('play');
+  anim(nx, 'enter');
+  if(isFlow()) nx.scrollTop = 0;
+  hud();
+}
+function next(){
+  var s = slides()[cur]; if(!s) return;
+  if(!isFlow()){
+    var h = frags(s).filter(function(f){ return !f.classList.contains('is-shown'); });
+    if(h.length){ h[0].classList.add('is-shown'); return; }
+  }
+  if(cur < slides().length - 1) show(cur + 1);
+}
+function prev(){
+  var s = slides()[cur]; if(!s) return;
+  if(!isFlow()){
+    var v = frags(s).filter(function(f){ return f.classList.contains('is-shown'); });
+    if(v.length){ v[v.length - 1].classList.remove('is-shown'); return; }
+  }
+  if(cur > 0) show(cur - 1, true);
+}
+function pad(n){ return (n < 10 ? '0' : '') + n; }
+function hud(){
+  var n = slides().length;
+  var c = document.querySelector('.hud .ctr'); if(c) c.textContent = pad(cur + 1) + ' / ' + pad(n);
+  var p = document.querySelector('.prog'); if(p) p.style.width = ((cur + 1) / n * 100) + '%';
+  try{ history.replaceState(null, '', '#' + (cur + 1)); }catch(e){}
+}
+function resetAll(){ slides().forEach(function(s){ s.classList.remove('is-active','play'); anim(s, 'reset'); }); }
+function refresh(n){ resetAll(); show(typeof n === 'number' ? n : cur, true); }
+
+deck.addEventListener('click', function(ev){
+  var t = ev.target;
+  var sp = t.closest('[data-sample]');
+  if(sp){ A.demo.play(sp.closest('.slide'), sp.getAttribute('data-sample')); sp.blur(); return; }
+  var ac = t.closest('[data-act]');
+  if(ac){ var k = ac.getAttribute('data-act'); if(A[k] && A[k].run) A[k].run(ac.closest('.slide')); ac.blur(); return; }
+  if(editing() || isFlow()) return;
+  if(t.closest('button,a,.fx-demo')) return;
+  next();
+});
+document.addEventListener('keydown', function(e){
+  if(editing()){ if(e.key === 'Escape' && window.Editor) window.Editor.done(); return; }
+  if(e.metaKey || e.ctrlKey || e.altKey) return;
+  var k = e.key;
+  if(k === 'ArrowRight' || k === 'ArrowDown' || k === ' ' || k === 'PageDown' || k === 'Enter'){ e.preventDefault(); next(); }
+  else if(k === 'ArrowLeft' || k === 'ArrowUp' || k === 'PageUp' || k === 'Backspace'){ e.preventDefault(); prev(); }
+  else if(k === 'Home'){ show(0); }
+  else if(k === 'End'){ show(slides().length - 1, true); }
+  else if(k === 'f' || k === 'F'){ fs(); }
+});
+var tx = 0, ty = 0;
+document.addEventListener('touchstart', function(e){ var p = e.touches[0]; tx = p.clientX; ty = p.clientY; }, {passive:true});
+document.addEventListener('touchend', function(e){
+  if(editing()) return;
+  var p = e.changedTouches[0], dx = p.clientX - tx, dy = p.clientY - ty;
+  if(Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.4){ if(dx < 0) next(); else prev(); }
+}, {passive:true});
+
+function fs(){
+  var d = document;
+  var p = null;
+  try{
+    if(!(d.fullscreenElement || d.webkitFullscreenElement)){ var r = root.requestFullscreen || root.webkitRequestFullscreen; if(r) p = r.call(root); }
+    else { var x = d.exitFullscreen || d.webkitExitFullscreen; if(x) p = x.call(d); }
+  }catch(e){}
+  if(p && p.catch) p.catch(function(){});
+}
+var fsb = document.querySelector('.hb-fs');
+if(fsb){ if(!(root.requestFullscreen || root.webkitRequestFullscreen)) fsb.hidden = true; fsb.addEventListener('click', function(){ fs(); fsb.blur(); }); }
+var pb = document.querySelector('.hb-prev'), nb = document.querySelector('.hb-next');
+if(pb) pb.addEventListener('click', function(){ prev(); pb.blur(); });
+if(nb) nb.addEventListener('click', function(){ next(); nb.blur(); });
+
+var idleT;
+function wake(){ body.classList.remove('idle'); clearTimeout(idleT); idleT = setTimeout(function(){ if(!editing()) body.classList.add('idle'); }, 2600); }
+document.addEventListener('mousemove', wake);
+document.addEventListener('touchstart', wake, {passive:true});
+
+window.App = { show:show, next:next, prev:prev, slides:slides, refresh:refresh, get cur(){ return cur; } };
+
+window.addEventListener('resize', layout);
+window.addEventListener('hashchange', function(){ var n = parseInt((location.hash || '').slice(1), 10); if(!isNaN(n) && n - 1 !== cur) show(n - 1); });
+layout();
+resetAll();
+var h0 = parseInt((location.hash || '').slice(1), 10);
+try{ var ss = sessionStorage.getItem('timy-slide'); if(ss !== null){ sessionStorage.removeItem('timy-slide'); h0 = parseInt(ss, 10) + 1; } }catch(e){}
+show(isNaN(h0) ? 0 : h0 - 1);
+wake();
+})();
+</script>
+</body>
+</html>
